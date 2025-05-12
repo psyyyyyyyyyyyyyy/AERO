@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 16px;
+  margin-top: 20px;
+}
+
+.tab {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.active {
+  background: #7ED6EA;
+  color: white;
+  font-weight: bold;
+}

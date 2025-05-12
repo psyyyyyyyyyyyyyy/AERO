@@ -1,0 +1,8 @@
+.banner {
+    height: 254px;
+    background: linear-gradient(to bottom, #E3F7FF, #5FCAF4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

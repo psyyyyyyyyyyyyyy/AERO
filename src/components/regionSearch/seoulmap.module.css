@@ -1,0 +1,9 @@
+.mapContainer {
+  text-align: center;
+  margin: 12px 0;
+}
+
+.map {
+  max-width: 90%;
+  height: auto;
+}

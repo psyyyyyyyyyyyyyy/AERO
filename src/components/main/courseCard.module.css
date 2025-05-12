@@ -1,0 +1,42 @@
+.card {
+    width: 150px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  
+  .image {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  
+  .text {
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .heartButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 0;
+  }
+  
+  .liked {
+    color: #ff5c5c;
+  }
+  
+  

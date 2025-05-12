@@ -1,0 +1,43 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.tabContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 10px 20px;
+  scroll-behavior: smooth;
+  width: max-content;
+}
+
+.tabContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  background: #e5e5e5;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.active {
+  background: #7ED6EA;
+  color: white;
+}
+
+.gradient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, white);
+}
