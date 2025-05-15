@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./facilityoptions.module.css";
 
 const options = [
@@ -10,10 +11,22 @@ const options = [
 ];
 
 export default function FacilityOptions({ visible }) {
+  const [selected, setSelected] = useState([]);
+
+  const toggleOption = (opt) => {
+    setSelected((prev) =>
+      prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt]
+    );
+  };
+
   return (
     <div className={`${styles.options} ${visible ? styles.show : ""}`}>
       {options.map((opt, i) => (
-        <button key={i} className={styles.optionBtn}>
+        <button
+          key={i}
+          className={`${styles.optionBtn} ${selected.includes(opt) ? styles.selected : ""}`}
+          onClick={() => toggleOption(opt)}
+        >
           {opt}
         </button>
       ))}
