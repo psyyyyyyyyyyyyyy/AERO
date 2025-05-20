@@ -1,0 +1,25 @@
+.detail {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  border: none;
+  padding: 12px 0;
+  font-size: 16px;
+  border-radius: 24px;
+  background-color: #7ed6ea;
+  color: white;
+  cursor: pointer;
+}
+
+.save {
+  display: block;
+  width: 80%;
+  margin: 10px auto 30px;
+  border: none;
+  padding: 12px 0;
+  font-size: 16px;
+  border-radius: 24px;
+  background-color: #7ed6ea;
+  color: white;
+  cursor: pointer;
+}
