@@ -1,0 +1,29 @@
+.toggleContainer {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}
+
+.buttonSection {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.active,
+.inactive {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: none;
+}
+
+.active {
+  background-color: #7ed6ea;
+  color: #fff;
+}
+
+.inactive {
+  background-color: #eee;
+  color: #444;
+}

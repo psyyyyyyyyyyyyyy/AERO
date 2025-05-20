@@ -1,18 +1,20 @@
 import { useState } from "react";
 import styles from "./sorttabs.module.css";
+import { FiChevronDown } from "react-icons/fi";
 
 export default function SortTabs() {
-  const [active, setActive] = useState("인기순");
+  const [sortOrder, setSortOrder] = useState("최신순");
 
-  const toggleSort = () => {
-    setActive((prev) => (prev === "최신순" ? "인기순" : "최신순"));
+  const toggleSortOrder = () => {
+    setSortOrder((prev) => (prev === "최신순" ? "인기순" : "최신순"));
   };
 
   return (
     <div className={styles.container}>
-      <button className={`${styles.tab} ${styles.active}`} onClick={toggleSort}>
-        {active}
-      </button>
+    <button className={styles.sortBtn} onClick={toggleSortOrder}>
+            {sortOrder}
+            <FiChevronDown className={styles.icon} />
+          </button>
     </div>
   );
 }
