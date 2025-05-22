@@ -8,6 +8,7 @@
   padding: 20px;
   z-index: 10;
   background-color: transparent;
+  max-width: 430px;
 }
 
 .recommendBtn {
