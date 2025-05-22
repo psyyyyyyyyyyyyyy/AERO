@@ -33,7 +33,10 @@
   right: 10px;
   border: none;
   background: transparent;
-  font-size: 18px;
   cursor: pointer;
-  color: #888;
+}
+
+.closeIcon {
+  font-size: 20px;
+  color: #666;
 }

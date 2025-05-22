@@ -45,8 +45,7 @@ export default function MenuDrawer({ onClose }) {
         <div>
           <hr className={styles.line} />
           <ul className={styles.accountList}>
-            <li onClick={() => handleMove("/account")}>Account</li>
-            <li onClick={() => handleMove("/logout")}>Logout</li>
+            <li onClick={() => handleMove("/start")}>Login</li>
           </ul>
         </div>
       </div>

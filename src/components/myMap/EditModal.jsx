@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { FiCamera } from "react-icons/fi";
+import { FiCamera, FiX } from "react-icons/fi";
 import styles from "./editModal.module.css";
 
 export default function EditModal({ onClose }) {
@@ -23,9 +23,10 @@ export default function EditModal({ onClose }) {
       <div className={styles.editHeader}>
         <h3>add 📌</h3>
         <button className={styles.closeBtn} onClick={onClose}>
-          ×
+          <FiX className={styles.closeIcon} />
         </button>
       </div>
+
       <input
         type="text"
         placeholder="주소를 입력해주세요."
