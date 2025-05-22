@@ -1,8 +1,13 @@
 .banner {
-    height: 254px;
-    background: linear-gradient(to bottom, #E3F7FF, #5FCAF4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  height: 254px;
+  background: linear-gradient(to bottom, #e3f7ff, #5fcaf4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  margin-top: 10%;
+  width: 70%;
+  height: auto;
+}

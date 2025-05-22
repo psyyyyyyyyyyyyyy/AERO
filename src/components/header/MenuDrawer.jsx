@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./menuDrawer.module.css";
 import { useState } from "react";
 import { FiX } from "react-icons/fi";
+import AERO from "../../assets/images/AERO4.png";
 
 export default function MenuDrawer({ onClose }) {
   const navigate = useNavigate();
@@ -31,12 +32,13 @@ export default function MenuDrawer({ onClose }) {
           <div className={styles.topBar}>
             <FiX className={styles.closeBtn} onClick={handleClose} />
           </div>
+          <img src={AERO} className={styles.logo} />
           <ul className={styles.menuList}>
             <li onClick={() => handleMove("/search")}>관광지 검색 🧳</li>
             <li onClick={() => handleMove("/course")}>코스 전체보기 🏔️</li>
             <li onClick={() => handleMove("/schedule")}>여행 일정 📅</li>
             <li onClick={() => handleMove("/wishlist")}>관심 여행지 💙</li>
-            <li onClick={() => handleMove("/map")}>my travel map 🗺️</li>
+            <li onClick={() => handleMove("/mymap")}>My Travel Map 🗺️</li>
           </ul>
         </div>
 

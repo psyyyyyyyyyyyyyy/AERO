@@ -4,6 +4,7 @@ import CourseDetailPage from "../pages/CourseDetailPage";
 import RegionSearchPage from "../pages/RegionSearchPage";
 import AddTravelPage from "../pages/AddTravelPage";
 import CourseSearchPage from "../pages/CourseSearchPage";
+import MyMapPage from "../pages/MyMapPage";
 
 export default function AppRouter() {
   return (
@@ -14,6 +15,7 @@ export default function AppRouter() {
         <Route path="/search" element={<RegionSearchPage />} />
         <Route path="/schedule" element={<AddTravelPage />} />
         <Route path="/example" element={<CourseDetailPage />} />
+        <Route path="/mymap" element={<MyMapPage />} />
       </Routes>
     </Router>
   );
