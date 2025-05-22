@@ -1,3 +1,4 @@
+import { FiX } from "react-icons/fi";
 import styles from "./markerModal.module.css";
 
 export default function MarkerModal({ onClose, markerData }) {
@@ -10,7 +11,7 @@ export default function MarkerModal({ onClose, markerData }) {
       />
       <p className={styles.cardText}>{markerData.text}</p>
       <button className={styles.closeBtn} onClick={onClose}>
-        ×
+        <FiX className={styles.closeIcon} />
       </button>
     </div>
   );

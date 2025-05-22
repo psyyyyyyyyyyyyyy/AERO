@@ -96,3 +96,13 @@
   left: 0;
 }
 
+.closeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.closeIcon {
+  font-size: 20px;
+  color: #555;
+}
