@@ -1,0 +1,32 @@
+.topBackground {
+  background: linear-gradient(to bottom, #5fcaf4, #e3f7ff);
+  padding: 24px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  height: 360px;
+}
+
+.logoWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  animation: slideFadeDown 0.7s ease-out;
+  animation-fill-mode: both;
+}
+
+.logo {
+  width: 158px;
+  height: auto;
+  margin-top: 90px;
+}
+
+@keyframes slideFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
