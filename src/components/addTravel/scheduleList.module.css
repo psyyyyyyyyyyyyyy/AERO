@@ -1,0 +1,61 @@
+.wrapper {
+  margin: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.schedule {
+  display: flex;
+  align-items: center;
+  background: #f2f2f2;
+  border-radius: 12px;
+  padding: 12px;
+  transition: background 0.2s ease;
+}
+
+.schedule:hover {
+  background: #e0e0e0;
+}
+
+.number {
+  min-width: 50px;
+  font-weight: bold;
+  color: #7ED6EA;
+  user-select: none;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  padding-left: 8px;
+}
+
+.icon {
+  margin-left: 10px;
+  color: #555;
+  cursor: pointer;
+}
+
+.add {
+  display: block;
+  margin: 20px auto;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.add:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}

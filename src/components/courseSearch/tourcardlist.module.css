@@ -1,0 +1,12 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 20px;
+}
+
+.card {
+  height: 120px;
+  background: linear-gradient(to bottom, #888, #222);
+  border-radius: 12px;
+}

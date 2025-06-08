@@ -1,0 +1,47 @@
+.container {
+  padding: 20px 20px 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tabContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.tab {
+  padding: 6px 16px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.active {
+  background-color: #a8dff2;
+  color: white;
+  font-weight: bold;
+}
+
+.sortBtn {
+  padding: 6px 12px;
+  background-color: white;
+  border: 1px solid #d8d8d8;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon {
+  font-size: 16px;
+}
