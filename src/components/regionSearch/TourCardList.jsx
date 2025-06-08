@@ -1,4 +1,4 @@
-import styles from "./tourcardlist.module.css";
+import styles from "./tourCardList.module.css";
 
 export default function TourCardList() {
   return (
