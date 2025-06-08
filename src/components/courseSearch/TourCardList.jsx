@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-
 import styles from "./tourCardList.module.css";
 
 export default function TourCardList() {
