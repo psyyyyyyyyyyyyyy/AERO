@@ -5,20 +5,23 @@
 }
 
 .tabContainer {
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 8px;
   padding: 10px 20px;
   scroll-behavior: smooth;
-  width: max-content;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 .tabContainer::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome, Safari */
 }
 
 .tab {
+  flex-shrink: 0;
   background: #e5e5e5;
   border: none;
   border-radius: 20px;
@@ -28,7 +31,7 @@
 }
 
 .active {
-  background: #7ED6EA;
+  background: #7ed6ea;
   color: white;
 }
 
