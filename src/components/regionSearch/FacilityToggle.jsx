@@ -1,4 +1,4 @@
-import styles from "./facilityToggle.module.css";
+import styles from "./facilitytoggle.module.css";
 
 export default function FacilityToggle({ onClick, active }) {
   return (
