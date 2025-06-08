@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FiCircle, FiCheckCircle } from "react-icons/fi";
-import styles from "./regionMap.module.css";
+import styles from "./regionmap.module.css";
 
 export default function RegionMap({ paths, regionName, viewBox = "0 0 800 800" }) {
   const [selected, setSelected] = useState([]);

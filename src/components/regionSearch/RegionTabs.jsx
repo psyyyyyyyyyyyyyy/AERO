@@ -1,4 +1,4 @@
-import styles from "./regionTabs.module.css";
+import styles from "./regiontabs.module.css";
 
 const regions = [
   "서울", "부산", "대전", "대구", "광주", "울산",
