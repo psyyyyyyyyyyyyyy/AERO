@@ -36,7 +36,7 @@ export default function RegionMap({ paths, regionName, viewBox = "0 0 800 800" }
               <path
                 d={d}
                 onClick={() => handleClick(id)}
-                fill={selected.includes(id) ? "#7ED6EA" : "#fff"}
+                fill={selected.includes(id) ? "#D3F1FC" : "#fff"}
                 stroke="#000"
                 style={{ cursor: "pointer" }}
               />
