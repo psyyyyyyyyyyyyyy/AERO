@@ -1,4 +1,4 @@
-import styles from "./scheduleModal.module.css";
+import styles from "./schedulemodal.module.css";
 
 const schedule = [
   {

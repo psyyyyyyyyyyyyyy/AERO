@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./sortTabs.module.css";
+import styles from "./sorttabs.module.css";
 import { FiChevronDown } from "react-icons/fi";
 
 export default function SortTabs() {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./facilityOptions.module.css";
+import styles from "./facilityoptions.module.css";
 
 const options = [
   "경사로",
