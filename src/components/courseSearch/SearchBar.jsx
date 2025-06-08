@@ -1,5 +1,5 @@
 import { FiSearch } from "react-icons/fi";
-import styles from "./searchBar.module.css";
+import styles from "./searchbar.module.css";
 
 export default function SearchBar() {
   return (
