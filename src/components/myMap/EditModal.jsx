@@ -1,20 +1,36 @@
 import { useRef, useState } from "react";
 import { FiCamera, FiX } from "react-icons/fi";
 import styles from "./editModal.module.css";
+import { uploadTravelLog } from "../../api/MyMapApi";
 
 export default function EditModal({ onClose }) {
   const fileInputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [file, setFile] = useState(null);
+  const [address, setAddress] = useState("");
+  const [content, setContent] = useState("");
 
   const handleImageClick = () => {
     fileInputRef.current?.click();
   };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      const imageUrl = URL.createObjectURL(selectedFile);
       setPreviewUrl(imageUrl);
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      await uploadTravelLog({ address, content, file });
+      alert("저장되었습니다.");
+      onClose();
+    } catch (e) {
+      console.error(e);
+      alert("업로드 실패");
     }
   };
 
@@ -31,6 +47,8 @@ export default function EditModal({ onClose }) {
         type="text"
         placeholder="주소를 입력해주세요."
         className={styles.input}
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
       />
 
       <div
@@ -57,8 +75,13 @@ export default function EditModal({ onClose }) {
       <textarea
         placeholder="한줄 기록을 입력해주세요."
         className={styles.textarea}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
       />
-      <button className={styles.saveBtn}>save</button>
+
+      <button className={styles.saveBtn} onClick={handleSave}>
+        save
+      </button>
     </div>
   );
 }

@@ -1,8 +1,23 @@
 import styles from "./regiontabs.module.css";
 
 const regions = [
-  "서울", "부산", "대전", "대구", "광주", "울산",
-  "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"
+  { name: "서울", code: "1" },
+  { name: "인천", code: "2" },
+  { name: "대전", code: "3" },
+  { name: "대구", code: "4" },
+  { name: "광주", code: "5" },
+  { name: "부산", code: "6" },
+  { name: "울산", code: "7" },
+  { name: "세종", code: "8" },
+  { name: "경기", code: "31" },
+  { name: "강원", code: "32" },
+  { name: "충북", code: "33" },
+  { name: "충남", code: "34" },
+  { name: "경북", code: "35" },
+  { name: "경남", code: "36" },
+  { name: "전북", code: "37" },
+  { name: "전남", code: "38" },
+  { name: "제주", code: "39" },
 ];
 
 export default function RegionTabs({ selectedRegion, onSelect }) {
@@ -11,11 +26,13 @@ export default function RegionTabs({ selectedRegion, onSelect }) {
       <div className={styles.tabContainer}>
         {regions.map((region) => (
           <button
-            key={region}
+            key={region.code}
             onClick={() => onSelect(region)}
-            className={`${styles.tab} ${region === selectedRegion ? styles.active : ""}`}
+            className={`${styles.tab} ${
+              region.name === selectedRegion.name ? styles.active : ""
+            }`}
           >
-            {region}
+            {region.name}
           </button>
         ))}
       </div>

@@ -1,18 +1,45 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 export const useScheduleStore = create((set) => ({
-  places: [], // 관광지 목록
-  details: [], // 상세 일정들
+  schedulesByDay: {}, // 예: { 1: [{ value, contentId, mapX, mapY }], 2: [...], ... }
+  detailsByDay: {}, // 예: { 1: [{ time, description }], 2: [...], ... }
 
-  setPlaces: (newPlaces) => set({ places: newPlaces }),
+  setPlacesForDay: (day, places) =>
+    set((state) => ({
+      schedulesByDay: {
+        ...state.schedulesByDay,
+        [day]: places,
+      },
+    })),
 
-  setDetail: (index, key, value) =>
+  //개별 관광지 상세 필드 수정
+  setDetailForDay: (day, index, key, value) =>
     set((state) => {
-      const newDetails = [...state.details];
-      newDetails[index] = {
-        ...newDetails[index],
-        [key]: value,
+      const prevDetails = state.detailsByDay[day] || [];
+      const updatedDetails = [...prevDetails];
+      if (!updatedDetails[index]) updatedDetails[index] = {};
+      updatedDetails[index][key] = value;
+      return {
+        detailsByDay: {
+          ...state.detailsByDay,
+          [day]: updatedDetails,
+        },
       };
-      return { details: newDetails };
+    }),
+
+  //상세 내용 배열 전체를 바꿔치기 (드래그 전용)
+  setDetailsForDay: (day, newDetails) =>
+    set((state) => ({
+      detailsByDay: {
+        ...state.detailsByDay,
+        [day]: newDetails,
+      },
+    })),
+    
+    // store 초기화
+  resetStore: () =>
+    set({
+      schedulesByDay: {},
+      detailsByDay: {},
     }),
 }));

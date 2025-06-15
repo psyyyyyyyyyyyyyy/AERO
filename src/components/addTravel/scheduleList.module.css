@@ -17,10 +17,6 @@
   transition: background 0.2s ease;
 }
 
-.schedule:hover {
-  background: #e0e0e0;
-}
-
 .number {
   min-width: 50px;
   font-weight: bold;

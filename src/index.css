@@ -45,6 +45,6 @@ button {
 
 input:focus,
 textarea:focus {
-  border: 1px solid #5fcaf4;
+  border: none;
   outline: none;
 }

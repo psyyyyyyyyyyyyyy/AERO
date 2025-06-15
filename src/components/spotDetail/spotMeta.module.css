@@ -1,0 +1,51 @@
+.meta {
+  background: #f8f8f8;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.item {
+  background-color: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #444;
+}
+
+.value {
+  color: #666;
+}
+
+.linkWrapper {
+  grid-column: 1 / -1; /* 그리드 전체 너비 차지 */
+  text-align: center;
+  margin-top: 4px;
+}
+
+.linkButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #7ED6EA;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.linkButton:hover {
+  background-color: #64c9df;
+}

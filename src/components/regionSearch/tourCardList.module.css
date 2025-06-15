@@ -1,12 +1,52 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 16px;
   padding: 20px;
 }
 
 .card {
-  height: 120px;
-  background: linear-gradient(to bottom, #888, #222);
+  position: relative;
+  width: 100%;
+  height: 200px;
   border-radius: 12px;
+  overflow: hidden;
+  background-color: #ccc;
+}
+
+.overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  height: 40%;
+}
+
+.textTop {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.textBottom {
+  text-align: right;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.address {
+  font-size: 10px;
+}
+
+.like {
+  margin-top: 4px;
+  font-size: 10px;
 }
