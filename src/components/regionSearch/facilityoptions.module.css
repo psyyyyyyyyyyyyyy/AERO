@@ -12,6 +12,9 @@
 }
 
 .optionBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   width: 100%;
   background: #fff;
   border: 1px solid #ddd;
@@ -26,6 +29,11 @@
 
 .selected {
   background: #dcdcdc;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
 }
 
 .searchBtn {

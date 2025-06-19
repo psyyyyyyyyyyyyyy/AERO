@@ -53,6 +53,7 @@ export default function ScheduleList({ selectedDay }) {
       contentId: place.contentId,
       mapX: place.mapX,
       mapY: place.mapY,
+      firstImage: place.firstImage || null,
     };
 
     setPlacesForDay(

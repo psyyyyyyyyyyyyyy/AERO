@@ -1,7 +1,7 @@
 import { APIService } from "./axios";
 
 /**
- * 관광지 필터링 조회 API
+ * 관광지 필터링 조회 API (토큰 유무에 따라 private/public 사용)
  */
 export const fetchTourSpots = async ({
   areaCode,
@@ -10,7 +10,7 @@ export const fetchTourSpots = async ({
   themeFilters,
   page = 0,
   size = 10,
-  sortBy = "like", // 기본 좋아요순
+  sortBy = "like",
 }) => {
   const params = {
     areaCode,
@@ -22,5 +22,8 @@ export const fetchTourSpots = async ({
     sortBy,
   };
 
-  return await APIService.public.get("/api/tourspots/filter", { params });
+  const token = localStorage.getItem("accessToken");
+  const client = token ? APIService.private : APIService.public;
+
+  return await client.get("/api/tourspots/filter", { params });
 };

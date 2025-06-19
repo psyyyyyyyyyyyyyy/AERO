@@ -64,3 +64,31 @@ export async function fetchBarrierFreeInfo(contentId) {
     return null;
   }
 }
+
+/**
+ * 관광지 좋아요 등록 (POST)
+ * POST /api/tourspots/likes/{tourSpotId}
+ */
+export const likeSpot = async (tourSpotId) => {
+  try {
+    const res = await APIService.private.post(`/api/tourspots/likes/${tourSpotId}`);
+    return res.data;
+  } catch (error) {
+    console.error("❤️ 관광지 좋아요 실패:", error);
+    throw error;
+  }
+};
+
+/**
+ * 관광지 좋아요 취소 (DELETE)
+ * DELETE /api/tourspots/likes/{tourSpotId}
+ */
+export const unlikeSpot = async (tourSpotId) => {
+  try {
+    const res = await APIService.private.delete(`/api/tourspots/likes/${tourSpotId}`);
+    return res.data;
+  } catch (error) {
+    console.error("💔 관광지 좋아요 취소 실패:", error);
+    throw error;
+  }
+};

@@ -56,7 +56,7 @@ export default function RegionSearchPage() {
       sigunguCode: "",
       facilityFilters: [],
       themeFilters: [],
-      sortBy: "like",
+      sortBy: "likes",
       page: 0,
       size: 10,
     },
@@ -152,7 +152,7 @@ export default function RegionSearchPage() {
       <Pagination
         currentPage={formValues.page}
         totalPages={totalPages}
-        onChange={(page) => setValue("page", page)} // ✅ 선택한 페이지 상위 전달
+        onChange={(page) => setValue("page", page)} // 선택한 페이지 상위 전달
       />
     </div>
   );

@@ -25,7 +25,7 @@ export default function SpotBarrierFree({ info }) {
         {renderField("유도 안내", info.guidesystem)}
         {renderField("점자블록", info.braileblock)}
         {renderField("점자 홍보물", info.brailepromotion)}
-        {renderField("수화 안내인", info.guidehuman)}
+        {renderField("안내요원", info.guidehuman)}
         {renderField("엘리베이터", info.elevator)}
         {renderField("화장실", info.restroom)}
         {renderField("유아 휴게실", info.lactationroom)}

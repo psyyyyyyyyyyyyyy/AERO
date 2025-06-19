@@ -1,10 +1,10 @@
 import styles from "./facilityIcons.module.css";
 
-import wheelchairIcon from "../../assets/images/경사로.png";
-import parkingIcon from "../../assets/images/장애인 주차장.png";
-import toiletIcon from "../../assets/images/장애인 화장실.png";
-import rentalIcon from "../../assets/images/휠체어.png";
-import elevatorIcon from "../../assets/images/엘리베이터.png";
+import wheelchairIcon from "../../assets/images/publictransport.png";
+import parkingIcon from "../../assets/images/parking.png";
+import toiletIcon from "../../assets/images/restroom.png";
+import rentalIcon from "../../assets/images/wheelchair.png";
+import elevatorIcon from "../../assets/images/elevator.png";
 
 export default function FacilityIcons() {
   const items = [

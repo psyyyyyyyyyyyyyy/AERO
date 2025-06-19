@@ -3,11 +3,11 @@ import { FiChevronDown } from "react-icons/fi";
 
 export default function SortTabs({ current, onSelect }) {
   const toggleSortOrder = () => {
-    const nextSort = current === "like" ? "recent" : "like";
+    const nextSort = current === "likes" ? "recent" : "likes";
     onSelect(nextSort);
   };
 
-  const sortLabel = current === "like" ? "인기순" : "최신순";
+  const sortLabel = current === "likes" ? "인기순" : "최신순";
 
   return (
     <div className={styles.container}>

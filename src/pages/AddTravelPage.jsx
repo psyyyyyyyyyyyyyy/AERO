@@ -6,7 +6,6 @@ import Header from "../components/header/Header";
 import TitleHeader from "../components/addTravel/TitleHeader";
 import ToggleButtons from "../components/addTravel/ToggleButtons";
 import InputGroup from "../components/addTravel/InputGroup";
-import FacilityIcons from "../components/addTravel/FacilityIcons";
 import DayTabs from "../components/addTravel/DayTab";
 import MapSection from "../components/addTravel/MapSection";
 import ScheduleList from "../components/addTravel/ScheduleList";
@@ -60,6 +59,7 @@ export default function AddTravelPage() {
           contentId: place.contentId,
           mapX: place.mapX,
           mapY: place.mapY,
+          firstImage: place.firstImage || null,
         };
       })
       .filter(Boolean)

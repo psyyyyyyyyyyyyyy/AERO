@@ -1,14 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./tourCardList.module.css";
 import defaultImage from "../../assets/images/regionSearch/빈 이미지.png";
 
 export default function TourCardList({ spots = [] }) {
-  const navigate = useNavigate();
-
-  const handleClick = (id) => {
-    navigate(`/spot/${id}`);
-  };
-
   return (
     <div className={styles.grid}>
       {spots.map((spot) => {
@@ -17,10 +11,11 @@ export default function TourCardList({ spots = [] }) {
           : defaultImage;
 
         return (
-          <div
+          <Link
             key={spot.contentId}
+            to={`/spot/${spot.contentId}`}
+             state={{ liked: spot.liked }}
             className={styles.card}
-            onClick={() => handleClick(spot.contentId)}
             style={{
               backgroundImage: `url(${backgroundImg})`,
               backgroundSize: "cover",
@@ -37,7 +32,7 @@ export default function TourCardList({ spots = [] }) {
                 <p className={styles.like}>❤️ {spot.likeCount}</p>
               </div>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>
