@@ -1,36 +1,28 @@
-import { useState } from "react";
 import styles from "./wishlistTabs.module.css";
-import { FiChevronDown } from "react-icons/fi";
 
-export default function WishlistTabs() {
-  const [activeTab, setActiveTab] = useState("ALL");
-  const [sortOrder, setSortOrder] = useState("최신순");
-
-  const toggleSortOrder = () => {
-    setSortOrder((prev) => (prev === "최신순" ? "인기순" : "최신순"));
-  };
-
-  const tabs = ["ALL", "관심 여행지", "내 코스"];
+export default function WishlistTabs({ mode, userAiTab, setUserAiTab }) {
+  const isLikeMode = mode === "like";
 
   return (
     <div className={styles.container}>
-      <div className={styles.tabContainer}>
-        {tabs.map((tab) => (
+      <div className={styles.tabWrapper}>
+        <div className={styles.tabContainer}>
           <button
-            key={tab}
-            className={`${styles.tab} ${
-              activeTab === tab ? styles.active : ""
-            }`}
-            onClick={() => setActiveTab(tab)}
+            className={`${styles.tab} ${userAiTab === "ai" ? styles.active : ""}`}
+            onClick={() => setUserAiTab("ai")}
           >
-            {tab}
+            {isLikeMode ? "관광지" : "AI"}
           </button>
-        ))}
+          <button
+            className={`${styles.tab} ${userAiTab === "user" ? styles.active : ""}`}
+            onClick={() => setUserAiTab("user")}
+          >
+            {isLikeMode ? "코스" : "USER"}
+          </button>
+        </div>
       </div>
-      <button className={styles.sortBtn} onClick={toggleSortOrder}>
-        {sortOrder}
-        <FiChevronDown className={styles.icon} />
-      </button>
     </div>
   );
 }
+
+

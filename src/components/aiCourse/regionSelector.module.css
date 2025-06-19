@@ -1,0 +1,24 @@
+.container {
+  text-align: center;
+}
+.question {
+  font-size: 20px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.option {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: white;
+}
+.active {
+  background-color: #a7e6fb;
+  border-color: #00bcd4;
+}

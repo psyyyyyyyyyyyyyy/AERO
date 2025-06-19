@@ -19,3 +19,11 @@
   gap: 12px;
   margin-top: 16px;
 }
+
+.emptyText {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 2rem;
+  color: #888;
+  font-size: 1.1rem;
+}

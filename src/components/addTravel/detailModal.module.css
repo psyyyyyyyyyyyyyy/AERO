@@ -40,6 +40,11 @@
   font-size: 14px;
 }
 
+.input:focus {
+  border: 1px solid #ccc;
+  outline: none;
+}
+
 .textarea {
   resize: none;
   height: 80px;
@@ -47,6 +52,11 @@
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
+}
+
+.textarea:focus {
+  border: 1px solid #ccc;
+  outline: none;
 }
 
 .actions {

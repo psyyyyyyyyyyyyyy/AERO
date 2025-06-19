@@ -11,26 +11,52 @@ export default function Header() {
 
   const isHome = location.pathname === "/";
 
+  const isCourseDetail =
+    location.pathname.startsWith("/courses/ai") ||
+    location.pathname.startsWith("/courses/user");
+
+  const isAiCoursePage = location.pathname === "/aicourse";
+
   return (
     <>
-      <header className={styles.header}>
+      <header
+        className={`${styles.header} ${
+          isCourseDetail ? styles.whiteIcons : ""
+        }`}
+      >
         {isHome ? (
-          <button className={styles.recommendBtn}>AI 맞춤 여행지 추천</button>
+          <button
+            className={styles.recommendBtn}
+            onClick={() => navigate("/aicourse")}
+          >
+            AI 맞춤 여행지 추천
+          </button>
         ) : (
           <FiArrowLeft
-            className={styles.icon}
+            className={`${styles.icon} ${
+              isCourseDetail ? styles.whiteIcons : ""
+            }`}
             onClick={() => navigate(-1)}
             title="뒤로가기"
           />
         )}
+
+        {isAiCoursePage && (
+          <span className={styles.centerText}>AI 맞춤 여행지 추천</span>
+        )}
+
         <div className={styles.iconGroup}>
           <FiHome
-            className={styles.icon}
+            className={`${styles.icon} ${
+              isCourseDetail ? styles.whiteIcons : ""
+            }`}
             onClick={() => navigate("/")}
             title="홈으로"
           />
           <FiMenu
-            className={styles.icon}
+            className={`${styles.icon} ${
+              isCourseDetail ? styles.whiteIcons : ""
+            }`}
             title="메뉴"
             onClick={() => setMenuOpen(true)}
           />

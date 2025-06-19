@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.nextBtn {
+  background-color: #77daf5;
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.nextBtn:disabled {
+  background-color: #a7c7d1;
+  cursor: not-allowed;
+}

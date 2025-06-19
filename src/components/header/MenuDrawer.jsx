@@ -34,10 +34,10 @@ export default function MenuDrawer({ onClose }) {
           </div>
           <img src={AERO} className={styles.logo} />
           <ul className={styles.menuList}>
-            <li onClick={() => handleMove("/search")}>관광지 검색 🧳</li>
+            <li onClick={() => handleMove("/spot")}>관광지 전체보기 🧳</li>
             <li onClick={() => handleMove("/course")}>코스 전체보기 🏔️</li>
-            <li onClick={() => handleMove("/schedule")}>여행 일정 📅</li>
-            <li onClick={() => handleMove("/wishlist")}>관심 여행지 💙</li>
+            <li onClick={() => handleMove("/schedule")}>여행 일정생성 📅</li>
+            <li onClick={() => handleMove("/mypage")}>나의 보관함 💙</li>
             <li onClick={() => handleMove("/mymap")}>My Travel Map 🗺️</li>
           </ul>
         </div>

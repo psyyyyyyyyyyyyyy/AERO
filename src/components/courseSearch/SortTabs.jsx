@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./sortTabs.module.css";
 import { FiChevronDown } from "react-icons/fi";
 
-export default function SortTabs() {
-  const [activeTab, setActiveTab] = useState("ALL");
-  const [sortOrder, setSortOrder] = useState("최신순");
+export default function SortTabs({ current, onSelect, selectedType, onTypeChange }) {
+  const [sortOrder, setSortOrder] = useState(current);
+  const [activeTab, setActiveTab] = useState(selectedType || "ai");
 
   const toggleSortOrder = () => {
-    setSortOrder((prev) => (prev === "최신순" ? "인기순" : "최신순"));
+    const newOrder = sortOrder === "recent" ? "like" : "recent";
+    setSortOrder(newOrder);
+    onSelect(newOrder);
   };
 
-  const tabs = ["ALL", "AI", "user"];
+  const tabs = ["ai", "user"];
+
+  useEffect(() => {
+    onTypeChange(activeTab);
+  }, [activeTab]);
 
   return (
     <div className={styles.container}>
@@ -18,17 +24,15 @@ export default function SortTabs() {
         {tabs.map((tab) => (
           <button
             key={tab}
-            className={`${styles.tab} ${
-              activeTab === tab ? styles.active : ""
-            }`}
+            className={`${styles.tab} ${activeTab === tab ? styles.active : ""}`}
             onClick={() => setActiveTab(tab)}
           >
-            {tab}
+            {tab.toUpperCase()}
           </button>
         ))}
       </div>
       <button className={styles.sortBtn} onClick={toggleSortOrder}>
-        {sortOrder}
+        {sortOrder === "recent" ? "최신순" : "인기순"}
         <FiChevronDown className={styles.icon} />
       </button>
     </div>

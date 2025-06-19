@@ -1,28 +1,137 @@
+import { useState, useEffect } from "react";
 import Header from "../components/header/Header";
 import WishlistTabs from "../components/wishlist/WishlistTabs";
+import ModeTabs from "../components/wishlist/ModeTabs";
 import WishlistCard from "../components/wishlist/WishlistCard";
 import styles from "./wishlistPage.module.css";
 import img1 from "../assets/images/관광지1.png";
-import img2 from "../assets/images/관광지2.png";
+import {
+  fetchUserCourses,
+  fetchLikedCourses,
+  fetchLikedTourSpots,
+} from "../api/WishlistApi";
+import { useNavigate } from "react-router-dom";
 
 export default function WishlistPage() {
+  const [mode, setMode] = useState("my");
+  const [userCourses, setUserCourses] = useState([]);
+  const [aiCourses, setAiCourses] = useState([]);
+  const [userAiTab, setUserAiTab] = useState("ai");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        if (mode === "my") {
+          const data = await fetchUserCourses(userAiTab);
+          // 응답이 content를 기준으로 오므로 아래처럼 변경
+          if (userAiTab === "ai") {
+            setAiCourses(data.content || []);
+            setUserCourses([]);
+          } else {
+            setUserCourses(data.content || []);
+            setAiCourses([]);
+          }
+        } else if (mode === "like") {
+          if (userAiTab === "ai") {
+            const likedSpots = await fetchLikedTourSpots();
+            setUserCourses(likedSpots.content || []);
+            setAiCourses([]);
+          } else {
+            const likedCourses = await fetchLikedCourses("like");
+            setUserCourses(likedCourses.content || []);
+            setAiCourses([]);
+          }
+        }
+      } catch (e) {
+        alert("데이터를 불러오는 데 실패했습니다.");
+      }
+    };
+
+    loadData();
+  }, [mode, userAiTab]);
+
   return (
     <>
       <Header />
       <div className={styles.wrapper}>
-        <h2 className={styles.title}>관심 여행지 💙</h2>
-        <WishlistTabs />
+        <h2 className={styles.title}>나의 보관함 💙</h2>
+
+        <ModeTabs mode={mode} setMode={setMode} />
+        <WishlistTabs
+          mode={mode}
+          userAiTab={userAiTab}
+          setUserAiTab={setUserAiTab}
+        />
+
         <div className={styles.cardGrid}>
-          <WishlistCard
-            image={img1}
-            title="경주 여행 다 모아둠"
-            subtitle="경북 경주시"
-          />
-          <WishlistCard
-            image={img2}
-            title="겨울 필독! 한류 촬영 연화데이트"
-            subtitle="인천 송도"
-          />
+          {(mode === "my" || mode === "like") &&
+            (() => {
+              const isLikedSpots = mode === "like" && userAiTab === "ai";
+              const coursesToShow = isLikedSpots
+                ? userCourses
+                : userAiTab === "user"
+                ? userCourses
+                : aiCourses;
+
+              if (coursesToShow.length > 0) {
+                return coursesToShow.map((item) => {
+                  // 🔹 관광지 카드 렌더링
+                  if (isLikedSpots) {
+                    return (
+                      <WishlistCard
+                        key={item.id}
+                        image={item.firstImage || img1}
+                        title={item.title}
+                        subtitle={item.address}
+                        onClick={() =>
+                          navigate(`/spot/${item.contentId}`, { state: item })
+                        }
+                      />
+                    );
+                  }
+
+                  // 🔹 코스 카드 렌더링
+                  let repImage = "";
+                  if (mode === "like") {
+                    repImage = item.image || item.firstImage || "";
+                  } else {
+                    if (userAiTab === "ai") {
+                      repImage = item.image;
+                    } else {
+                      const schedules = item.detailedSchedule || [];
+                      const found = schedules.find((s) => s.firstImage);
+                      repImage = found?.firstImage || "";
+                    }
+                  }
+
+                  const idPrefix =
+                    mode === "like" ? item.type || "ai" : userAiTab;
+
+                  return (
+                    <WishlistCard
+                      key={item.id}
+                      image={repImage || img1}
+                      title={item.title}
+                      subtitle={item.theme}
+                      onClick={() =>
+                        navigate(`/courses/${idPrefix}/${item.id}`)
+                      }
+                    />
+                  );
+                });
+              } else {
+                return (
+                  <p className={styles.emptyText}>
+                    {mode === "like" && userAiTab === "ai"
+                      ? "좋아요한 관광지가 없습니다."
+                      : userAiTab === "user"
+                      ? "USER 코스가 없습니다."
+                      : "AI 코스가 없습니다."}
+                  </p>
+                );
+              }
+            })()}
         </div>
       </div>
     </>

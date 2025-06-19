@@ -1,0 +1,23 @@
+.container {
+  text-align: center;
+}
+.question {
+  font-size: 20px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.option {
+  padding: 10px 24px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: white;
+}
+.active {
+  background-color: #a7e6fb;
+  border-color: #00bcd4;
+}
