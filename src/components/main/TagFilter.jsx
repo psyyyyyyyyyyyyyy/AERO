@@ -1,6 +1,6 @@
 import styles from "./tagFilter.module.css";
 
-const tags = ["#혼자서", "#둘이서", "#감성적인", "#액티비티", "#커플"];
+const tags = ["자연관광", "역사관광", "문화관광", "레저스포츠", "쇼핑", "음식", "축제/공연/행사" ];
 
 export default function TagFilter() {
   return (

@@ -1,0 +1,25 @@
+.modeTabs {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 12px 12px 0 0;
+  background-color: #91e5f6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 4px;
+  transition: all 0.3s ease;
+}
+
+.tabButton.active {
+  background-color: white;
+  color: black;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}

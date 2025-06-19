@@ -8,8 +8,20 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 }
 
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 16px;
+}
+
+/* 버튼 스타일 유지 */
 .active,
 .inactive {
   font-size: 12px;
