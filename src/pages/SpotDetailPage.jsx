@@ -7,9 +7,9 @@ import {
 } from "../api/SpotDetailApi.js";
 import { ClipLoader } from "react-spinners";
 
-import SpotDetailHeader from "../components/SpotDetail/SpotDetailHeader";
-import SpotOverview from "../components/SpotDetail/SpotOverview";
-import SpotMeta from "../components/SpotDetail/SpotMeta";
+import SpotDetailHeader from "../components/spotDetail/SpotDetailHeader";
+import SpotOverview from "../components/spotDetail/SpotOverview";
+import SpotMeta from "../components/spotDetail/SpotMeta";
 import SpotMap from "../components/spotDetail/SpotMap";
 import SpotBarrierFree from "../components/spotDetail/SpotBarrierFree";
 import styles from "./spotDetailPage.module.css";
