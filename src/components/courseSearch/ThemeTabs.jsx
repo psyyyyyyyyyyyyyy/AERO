@@ -1,4 +1,4 @@
-import styles from "../../components/regionSearch/regionTabs.module.css";
+import styles from "../../components/regionSearch/regiontabs.module.css";
 
 const themes = [
   "자연관광",
