@@ -1,7 +1,7 @@
 import styles from "./spotDetailHeader.module.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { likeSpot, unlikeSpot } from "../../api/spotDetailApi";
+import { likeSpot, unlikeSpot } from "../../api/SpotDetailApi";
 
 export default function SpotDetailHeader({
   image,
