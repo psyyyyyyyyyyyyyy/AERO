@@ -7,6 +7,7 @@
 
 .toggleBtn {
   background: #fffacd;
+  color: black;
   border: none;
   padding: 8px 16px;
   border-radius: 10px;
@@ -16,6 +17,7 @@
 
 .selectAll {
   background: #eee;
+  color: black;
   border: none;
   border-radius: 50px;
   font-size: 12px;

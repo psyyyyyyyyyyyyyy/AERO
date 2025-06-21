@@ -25,11 +25,12 @@ const BASE_URL2 = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/get
 // 현재 날짜/시간 포맷 (정시 기준)
 const getBaseDateTime = () => {
   const now = new Date();
+  now.setHours(now.getHours() - 1); // 1시간 전으로 이동
+
   const pad = (n) => n.toString().padStart(2, "0");
 
   const baseDate = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}`;
-  const hour = now.getHours();
-  const baseTime = `${pad(hour)}00`; // 매 정시 발표
+  const baseTime = `${pad(now.getHours())}00`; // 정시만 지원
 
   return { baseDate, baseTime };
 };

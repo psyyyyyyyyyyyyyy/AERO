@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { fetchCourses } from "../api/CourseSearchApi";
 
-import SearchSection from "../components/courseSearch/SearchSection";
+import Header from "../components/header/Header";
 import FacilityToggle from "../components/regionSearch/FacilityToggle";
 import FacilityOptions from "../components/regionSearch/FacilityOptions";
 import SortTabs from "../components/courseSearch/SortTabs";
@@ -46,7 +46,7 @@ export default function CourseSearchPage() {
 
   return (
     <div>
-      <SearchSection />
+      <Header />
 
       <ThemeTabs
         selectedTheme={formValues.theme}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { fetchTourSpots } from "../api/RegionSearchApi";
 
-import SearchSection from "../components/regionSearch/SearchSection";
+import Header from "../components/header/Header";
 import RegionTabs from "../components/regionSearch/RegionTabs";
 import RegionMap from "../components/regionSearch/RegionMap";
 import FacilityToggle from "../components/regionSearch/FacilityToggle";
@@ -83,7 +83,7 @@ export default function RegionSearchPage() {
 
   return (
     <div>
-      <SearchSection />
+      <Header />
 
       <RegionTabs
         selectedRegion={selectedRegion}

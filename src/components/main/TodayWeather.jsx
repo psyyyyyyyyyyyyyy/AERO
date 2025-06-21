@@ -13,7 +13,7 @@ export default function TodayWeather() {
       const { latitude, longitude } = pos.coords;
       const { nx, ny } = convertXY(latitude, longitude);
 
-      // ✅ REST 방식으로 행정구 이름 가져오기
+      // REST 방식으로 행정구 이름 가져오기
       const region = await getRegionFromCoords(latitude, longitude);
       setLocation(region);
 
