@@ -20,7 +20,7 @@ export default defineConfig({
         name: "AERO",
         short_name: "AERO",
         description: "Barrier Free로 모두 함께 떠나는 여행 플랫폼",
-        theme_color: "#7ED6EA",
+        theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
         start_url: "/",

@@ -18,6 +18,25 @@ export default function MainPage() {
   const [tourSpots, setTourSpots] = useState([]);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
+
+useEffect(() => {
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.warn("위치 접근 거부:", error.message);
+      }
+    );
+  } else {
+    console.warn("이 브라우저는 위치 서비스를 지원하지 않습니다.");
+  }
+}, []);
 
   // 관광지 or 코스 데이터 로딩
   useEffect(() => {
