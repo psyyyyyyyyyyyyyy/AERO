@@ -15,8 +15,8 @@ export const fetchTourSpots = async ({
   const params = {
     areaCode,
     sigunguCode,
-    facilityFilters,
-    themeFilters,
+    facilityFilters: facilityFilters?.join(","),
+    themeFilters: themeFilters?.join(","),
     page,
     size,
     sortBy,

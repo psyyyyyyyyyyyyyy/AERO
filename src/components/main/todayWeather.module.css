@@ -1,0 +1,31 @@
+.container {
+  padding: 20px;
+  margin-top: 230px;
+}
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.card {
+  display: flex;
+  align-items: center;
+  background: #e7f0ff;
+  border-radius: 12px;
+  padding: 16px;
+}
+.icon {
+  font-size: 40px;
+  margin-right: 16px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+}
+.city {
+  font-size: 16px;
+  font-weight: bold;
+}
+.temp {
+  font-size: 14px;
+}

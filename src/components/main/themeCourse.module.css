@@ -1,0 +1,76 @@
+.section {
+  padding: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.sub {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.cardContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 12px;
+
+  /* 스크롤바 숨김 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.cardContainer::-webkit-scrollbar {
+  display: none;
+}
+
+
+.card {
+  width: 160px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.placeholder {
+  height: 100px;
+  background-color: #dcdcdc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}.section {
+  padding: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.sub {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.cardContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 12px;
+
+  /* 스크롤바 숨김 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.cardContainer::-webkit-scrollbar {
+  display: none;
+}

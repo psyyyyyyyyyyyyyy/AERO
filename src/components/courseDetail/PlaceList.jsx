@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import styles from "./placeList.module.css";
 import ScheduleModal from "./ScheduleModal";
+import defaultImage from "../../assets/images/courseDetail/빈 이미지.png";
 
 import publictransportIcon from "../../assets/images/publictransport.png";
 import elevatorIcon from "../../assets/images/elevator.png";
@@ -16,7 +17,11 @@ export default function PlaceList({ schedules = [] }) {
   const rowRef = useRef(null);
 
   const barrierOptions = [
-    { label: "접근로 가능", value: "publictransport", icon: publictransportIcon },
+    {
+      label: "접근로 가능",
+      value: "publictransport",
+      icon: publictransportIcon,
+    },
     { label: "엘리베이터", value: "elevator", icon: elevatorIcon },
     { label: "휠체어 대여 가능", value: "wheelchair", icon: wheelchairIcon },
     { label: "안내요원", value: "guidehuman", icon: guidehumanIcon },
@@ -73,7 +78,13 @@ export default function PlaceList({ schedules = [] }) {
                 onClick={() => handleClick(key)}
               >
                 <img
-                  src={place.imageUrl || place.firstImage || ""}
+                  src={
+                    place.imageUrl && place.imageUrl.trim() !== ""
+                      ? place.imageUrl
+                      : place.firstImage && place.firstImage.trim() !== ""
+                      ? place.firstImage
+                      : defaultImage
+                  }
                   alt={place.place}
                   className={styles.image}
                 />
@@ -90,7 +101,9 @@ export default function PlaceList({ schedules = [] }) {
         return selectedId === key ? (
           <div key={key} className={styles.detailBox}>
             <div className={styles.detailTitle}>{place.place}</div>
-            <div className={styles.detailAddress}>{place.address || "주소 정보 없음"}</div>
+            <div className={styles.detailAddress}>
+              {place.address || "주소 정보 없음"}
+            </div>
             <div className={styles.detailMemo}>{place.description}</div>
 
             {place.barrierFree && (
@@ -98,7 +111,11 @@ export default function PlaceList({ schedules = [] }) {
                 {barrierOptions.map((opt) =>
                   place.barrierFree[opt.value] ? (
                     <div key={opt.value} className={styles.iconItem}>
-                      <img src={opt.icon} alt={opt.label} className={styles.iconImage} />
+                      <img
+                        src={opt.icon}
+                        alt={opt.label}
+                        className={styles.iconImage}
+                      />
                       <span className={styles.iconLabel}>{opt.label}</span>
                     </div>
                   ) : null

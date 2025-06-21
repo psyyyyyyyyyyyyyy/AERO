@@ -7,6 +7,7 @@ import guidehumanIcon from "../../assets/images/guidehuman.png";
 import restroomIcon from "../../assets/images/restroom.png";
 import parkingIcon from "../../assets/images/parking.png";
 import roomIcon from "../../assets/images/room.png";
+import defaultImage from "../../assets/images/courseSearch/빈이미지.png";
 
 // 편의시설 아이콘 매핑
 const barrierFreeIcons = {
@@ -34,7 +35,15 @@ export default function TourCardList({ spots }) {
           className={styles.card}
           onClick={() => navigate(`/courses/${spot.type}/${spot.id}`)}
         >
-          <img src={spot.imageUrl} alt={spot.title} className={styles.image} />
+          <img
+            src={
+              spot.imageUrl && spot.imageUrl.trim() !== ""
+                ? spot.imageUrl
+                : defaultImage
+            }
+            alt={spot.title}
+            className={styles.image}
+          />
           <div className={styles.info}>
             <div className={styles.title}>{spot.title}</div>
             <div className={styles.people}>{spot.people}</div>
