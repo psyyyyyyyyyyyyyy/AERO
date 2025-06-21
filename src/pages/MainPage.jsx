@@ -15,22 +15,6 @@ export default function MainPage() {
   const [activeTab, setActiveTab] = useState("관광지");
   const [tourSpots, setTourSpots] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [mapReady, setMapReady] = useState(false);
-
-  // Naver Maps 스크립트 로드
-  useEffect(() => {
-    if (!window.naver || !window.naver.maps) {
-      const script = document.createElement("script");
-      script.src =
-        "https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=2r3fv1mwmg&submodules=geocoder";
-      script.async = true;
-      script.defer = true;
-      script.onload = () => setMapReady(true);
-      document.head.appendChild(script);
-     } else {
-      setMapReady(true); // 이미 로드되어 있다면 true
-    }
-  }, []);
 
   // 관광지 or 코스 데이터 로딩
   useEffect(() => {
@@ -64,7 +48,7 @@ export default function MainPage() {
       <Header />
       <MainBanner />
       <AlertModal />
-      {mapReady && <TodayWeather />}
+      <TodayWeather />
       <MainTabs activeTab={activeTab} onTabChange={setActiveTab} />
       {activeTab === "관광지" && (
         <ThemeCourse
