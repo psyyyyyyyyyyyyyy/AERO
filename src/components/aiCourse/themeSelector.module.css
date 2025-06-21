@@ -21,12 +21,9 @@
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #fff;
+  color: black;
   cursor: pointer;
   transition: 0.2s ease;
-}
-
-.option:hover {
-  background-color: #f0f0f0;
 }
 
 .selected {
