@@ -47,7 +47,7 @@ export default function MainPage() {
     <div>
       <Header />
       <MainBanner />
-      <AlertModal />
+      {/* <AlertModal /> */}
       <TodayWeather />
       <MainTabs activeTab={activeTab} onTabChange={setActiveTab} />
       {activeTab === "관광지" && (
