@@ -8,6 +8,7 @@ import {
   likeUserCourse,
   unlikeUserCourse,
 } from "../../api/LikeApi";
+import defaultImage from "../../assets/images/courseSearch/빈이미지.png";
 
 export default function CourseTitle({ course }) {
   const { id, type } = useParams();
@@ -34,7 +35,10 @@ export default function CourseTitle({ course }) {
   // 날짜 YYYY.MM.DD 형식으로 포맷
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
+    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}.${String(date.getDate()).padStart(2, "0")}`;
   };
 
   const formattedStart = formatDate(startDate);
@@ -67,10 +71,15 @@ export default function CourseTitle({ course }) {
   return (
     <div className={styles.wrapper}>
       <img
-        src={firstValidImage}
+        src={
+          firstValidImage && firstValidImage.trim() !== ""
+            ? firstValidImage
+            : defaultImage
+        }
         alt="header"
         className={styles.headerImage}
       />
+
       <div className={styles.overlay} />
       <div className={styles.titleContainer}>
         <div className={styles.topRow}>
