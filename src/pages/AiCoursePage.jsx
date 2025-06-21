@@ -6,6 +6,8 @@ import PaceSelector from "../components/aiCourse/PaceSelector";
 import ThemeSelector from "../components/aiCourse/ThemeSelector";
 import NextButton from "../components/aiCourse/NextButton";
 import Header from "../components/header/Header";
+import LoadingOverlay from "../components/aiCourse/LoadingOverlay";
+
 import styles from "./aiCoursePage.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { generateAiCourse } from "../api/AicourseApi";
@@ -22,17 +24,21 @@ export default function AiCoursePage() {
     pace: "",
   });
   const [dateError, setDateError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleNext = async () => {
     if (step === 5) {
       try {
+        setLoading(true); // 로딩 시작
         const result = await generateAiCourse(form);
         navigate(`/courses/ai/${result.id}`);
       } catch (error) {
         console.error("AI 코스 생성 실패:", error);
         alert("AI 코스 생성 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false); // 로딩 종료
       }
     } else {
       setStep((prev) => prev + 1);
@@ -118,6 +124,8 @@ export default function AiCoursePage() {
           step={step}
           hasDateError={dateError}
         />
+
+        {loading && <LoadingOverlay />}
       </div>
     </>
   );

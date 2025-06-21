@@ -46,29 +46,50 @@ export default function AddTravelPage() {
   const handleSave = async () => {
     const { schedulesByDay, detailsByDay } = useScheduleStore.getState();
 
-    const detailedSchedule = Object.entries(schedulesByDay)
-  .flatMap(([day, places]) =>
-    places
-      .map((place, idx) => {
-        if (!place.value) return null; // 관광지 이름이 없으면 무시
-        return {
-          day: parseInt(day),
-          time: detailsByDay[day]?.[idx]?.time || "",
-          description: detailsByDay[day]?.[idx]?.description || "",
-          place: place.value,
-          contentId: place.contentId,
-          mapX: place.mapX,
-          mapY: place.mapY,
-          firstImage: place.firstImage || null,
-        };
-      })
-      .filter(Boolean)
-  );
+    // 필수 항목 유효성 검사
+    if (!title || !theme || !startDate || !endDate || !people) {
+      alert("모든 기본 정보를 입력해주세요.");
+      return false;
+    }
+
+    const totalDays = getTotalDays();
+
+    // 각 날짜마다 적어도 하나의 일정이 있는지 확인
+    for (let day = 1; day <= totalDays; day++) {
+      const dayKey = String(day);
+      const places = schedulesByDay[dayKey] || [];
+      const validPlaces = places.filter((place) => place?.value);
+      if (validPlaces.length === 0) {
+        alert(`${day}일차 일정에 최소 1개 이상의 관광지를 추가해주세요.`);
+        return false;
+      }
+    }
+
+    // 일정 데이터 구성
+    const detailedSchedule = Object.entries(schedulesByDay).flatMap(
+      ([day, places]) =>
+        places
+          .map((place, idx) => {
+            if (!place.value) return null; // 관광지 이름이 없으면 무시
+            return {
+              day: parseInt(day),
+              time: detailsByDay[day]?.[idx]?.time || "",
+              description: detailsByDay[day]?.[idx]?.description || "",
+              place: place.value,
+              contentId: place.contentId,
+              mapX: place.mapX,
+              mapY: place.mapY,
+              firstImage: place.firstImage || null,
+            };
+          })
+          .filter(Boolean)
+    );
 
     //시간 포함된 날짜로 변경
     const formatDate = (dateStr) => {
       return dateStr ? `${dateStr}T00:00:00` : "";
     };
+
     const requestBody = {
       title,
       theme,
@@ -82,8 +103,10 @@ export default function AddTravelPage() {
     try {
       await postTravelCourse(requestBody);
       alert("여행 계획이 저장되었습니다!");
+      return true;
     } catch (error) {
       alert("저장에 실패했습니다.");
+      return false;
     }
   };
 
@@ -106,7 +129,6 @@ export default function AddTravelPage() {
         people={people}
         setPeople={setPeople}
       />
-      {/* <FacilityIcons /> */}
       <DayTabs
         totalDays={totalDays}
         selectedDay={selectedDay}

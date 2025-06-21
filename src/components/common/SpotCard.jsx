@@ -1,11 +1,11 @@
 import styles from "./spotCard.module.css";
-import defaultImage from "../../assets/images/관광지1.png"; // 기본 이미지 추가 (직접 있는 경로로 수정)
+import defaultImage from "../../assets/images/관광지1.png";
 
-export default function SpotCard({ image, title, location }) {
+export default function SpotCard({ image, title, location, onClick }) {
   const backgroundImage = image ? `url(${image})` : `url(${defaultImage})`;
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div
         className={styles.image}
         style={{ backgroundImage }}

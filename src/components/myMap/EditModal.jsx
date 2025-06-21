@@ -3,7 +3,7 @@ import { FiCamera, FiX } from "react-icons/fi";
 import styles from "./editModal.module.css";
 import { uploadTravelLog } from "../../api/MyMapApi";
 
-export default function EditModal({ onClose }) {
+export default function EditModal({ onClose, onSaveSuccess }) {
   const fileInputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [file, setFile] = useState(null);
@@ -24,13 +24,20 @@ export default function EditModal({ onClose }) {
   };
 
   const handleSave = async () => {
+    // 유효성 검사
+    if (!address.trim() || !file || !content.trim()) {
+      alert("주소, 이미지, 내용을 모두 입력해주세요.");
+      return;
+    }
+
     try {
       await uploadTravelLog({ address, content, file });
       alert("저장되었습니다.");
-      onClose();
+      onSaveSuccess(); // 저장 성공 후 부모에게 알림
+      onClose(); // 모달 닫기
     } catch (e) {
       console.error(e);
-      alert("업로드 실패");
+      alert("사진의 용량이 너무 큽니다.");
     }
   };
 

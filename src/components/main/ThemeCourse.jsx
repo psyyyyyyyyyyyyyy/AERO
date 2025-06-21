@@ -21,6 +21,9 @@ export default function ThemeCourse({ title, sub, items = [], type }) {
             image={isSpot ? item.firstImage : item.imageUrl || ""}
             title={item.title}
             location={isSpot ? item.address : item.theme}
+            onClick={() =>
+              navigate(isSpot ? `/spot/${item.contentId}` : `/courses/${item.type}/${item.id}`)
+            }
           />
         ))}
       </div>
