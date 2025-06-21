@@ -10,12 +10,17 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isHome = location.pathname === "/";
-
   const isCourseDetail =
     location.pathname.startsWith("/courses/ai") ||
     location.pathname.startsWith("/courses/user");
-
   const isAiCoursePage = location.pathname === "/aicourse";
+
+  const centerText = (() => {
+    if (isAiCoursePage) return "AI 맞춤 여행지 추천";
+    if (location.pathname === "/spot") return "관광지 전체보기";
+    if (location.pathname === "/course") return "코스 전체보기";
+    return null;
+  })();
 
   return (
     <>
@@ -41,9 +46,7 @@ export default function Header() {
           />
         )}
 
-        {isAiCoursePage && (
-          <span className={styles.centerText}>AI 맞춤 여행지 추천</span>
-        )}
+        {centerText && <span className={styles.centerText}>{centerText}</span>}
 
         <div className={styles.iconGroup}>
           <FiHome

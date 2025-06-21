@@ -1,7 +1,8 @@
 import styles from "./spotDetailHeader.module.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { likeSpot, unlikeSpot } from "../../api/SpotDetailApi";
+import defaultImage from "../../assets/images/spotDetail/빈이미지.png";
 
 export default function SpotDetailHeader({
   image,
@@ -32,7 +33,11 @@ export default function SpotDetailHeader({
           {isLiked ? <FaHeart /> : <FaRegHeart />}
         </span>
       </div>
-      <img src={image} alt={title} className={styles.mainImage} />
+      <img
+        src={image && image.trim() !== "" ? image : defaultImage}
+        alt={title}
+        className={styles.mainImage}
+      />
     </div>
   );
 }
