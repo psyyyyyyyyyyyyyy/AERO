@@ -1,4 +1,4 @@
-## Feature
+## Features
 
 🎉 Start: Start New Project [:tada]
 ✨ Feat: 새로운 기능을 추가 [:sparkles]
