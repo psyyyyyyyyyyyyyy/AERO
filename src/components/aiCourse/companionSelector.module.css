@@ -17,6 +17,7 @@
   border-radius: 20px;
   border: 1px solid #ccc;
   background: white;
+  color: black;
 }
 .active {
   background-color: #a7e6fb;
