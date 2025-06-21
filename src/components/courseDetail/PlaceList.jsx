@@ -126,11 +126,11 @@ export default function PlaceList({ schedules = [] }) {
         ) : null;
       })}
 
-      <div className={styles.addBtnContainer}>
+      {/* <div className={styles.addBtnContainer}>
         <button className={styles.addBtn} onClick={() => setShowModal(true)}>
           + 상세 일정
         </button>
-      </div>
+      </div> */}
 
       {showModal && <ScheduleModal onClose={() => setShowModal(false)} />}
     </>

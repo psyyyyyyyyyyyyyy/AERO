@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header/Header";
+import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import MainBanner from "../components/main/MainBanner";
 import AlertModal from "../components/main/AlertModal";
 import TodayWeather from "../components/main/TodayWeather";
 import MainTabs from "../components/main/MainTabs";
 import ThemeCourse from "../components/main/ThemeCourse";
-import EventSection from "../components/main/EventSection";
 import CallTaxiSection from "../components/main/CallTaxiSection";
 
 import { fetchTourSpots } from "../api/RegionSearchApi";
@@ -47,8 +47,8 @@ export default function MainPage() {
     <div>
       <Header />
       <MainBanner />
-      {/* <AlertModal /> */}
       <TodayWeather />
+      <AlertModal />
       <MainTabs activeTab={activeTab} onTabChange={setActiveTab} />
       {activeTab === "관광지" && (
         <ThemeCourse
@@ -66,8 +66,8 @@ export default function MainPage() {
           type="course"
         />
       )}
-      <EventSection />
       <CallTaxiSection />
+      <ScrollToTopButton />
     </div>
   );
 }

@@ -1,98 +1,133 @@
+import { useEffect, useState } from "react";
 import styles from "./alertModal.module.css";
+import { fetchWeatherAlert } from "../../api/AlertApi";
+import { FiChevronDown } from "react-icons/fi";
+
+const REGION_MAP = {
+  "서울, 인천, 경기도": 109,
+  "부산, 울산, 경상남도": 159,
+  "대구, 경상북도": 143,
+  "광주, 전라남도": 156,
+  전북자치도: 146,
+  "대전, 세종, 충청남도": 133,
+  충청북도: 131,
+  강원도: 105,
+  제주도: 184,
+};
+
+const DEFAULT_REGION = "서울, 인천, 경기도";
 
 export default function AlertModal() {
+  const [region, setRegion] = useState(DEFAULT_REGION);
+  const [alert, setAlert] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const items = await fetchWeatherAlert(region);
+        const item = Array.isArray(items) ? items[0] : items;
+        if (item) setAlert(item);
+        console.log("기상 속보 데이터:", item);
+      } catch (e) {
+        console.warn("기상 속보 호출 실패", e);
+      }
+    };
+    fetchData();
+  }, [region]);
+
   return (
     <div className={styles.background}>
       <div className={styles.modal}>
-        <p className={styles.title}>
-          오늘 <strong>폭염주의보가 발령됩니다.</strong>
-        </p>
-        <p className={styles.description}>
-          발령 위치 | 대한민국 전성분도 어디구
-          <br />
-          발령 시간 | 오전 8:00
-          <br />
-          모든 여행자는 알림을 참고하여 여행시 주의하고, 바깥 활동을
-          자제해주세요.
-        </p>
-        <button className={styles.primaryButton}>
-          폭우 시 대처 요령 자세히 보기
-        </button>
-        <button className={styles.secondaryButton}>오늘 하루 그만 보기</button>
+        <div className={styles.header}>
+          <span className={styles.alertLabel}>알림</span>
+        </div>
+
+        <div className={styles.dropdownContainer}>
+          <button
+            className={styles.dropdownToggle}
+            onClick={() => setIsDropdownOpen((prev) => !prev)}
+          >
+            {region} <FiChevronDown/>
+          </button>
+          {isDropdownOpen && (
+            <div className={styles.dropdownMenu}>
+              {Object.keys(REGION_MAP).map((r) => (
+                <div
+                  key={r}
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    setRegion(r);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  {r}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {alert ? (
+          <>
+            <p className={styles.title}>
+              오늘 <strong>{alert.t1 || "기상 속보가 있습니다."}</strong>
+            </p>
+            <p className={styles.description}>
+              <strong>발령 위치</strong> | {region}
+              <br />
+              <strong>발령 시간</strong> |{" "}
+              {formatTime(alert.t5) || formatTime(alert.tmFc) || "알 수 없음"}
+              <br />
+              {isExpanded ? (
+                <>
+                  <strong>해당 구역</strong> | {alert.t2 || "-"}
+                  <br />
+                  <strong>발효 시각</strong> | {alert.t3 || "-"}
+                  <br />
+                  <strong>특보 현황</strong> | {alert.t6 || "-"}
+                  <br />
+                  <strong>예비 특보</strong> | {alert.t7 || "-"}
+                  <br />
+                  <strong>기타 정보</strong> | {alert.other || "-"}
+                  <br />
+                  <br />
+                  모든 여행자는 알림을 참고하여 여행 시 주의하세요.
+                  <br />
+                  해당 알림은 기상청에서 제공하는 기상특보정보 조회서비스 API를
+                  이용하였습니다.
+                  <div className={styles.expandWrapper}>
+                    <span
+                      className={styles.expandToggle}
+                      onClick={() => setIsExpanded(false)}
+                    >
+                      접기
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <div className={styles.expandWrapper}>
+                  <span
+                    className={styles.expandToggle}
+                    onClick={() => setIsExpanded(true)}
+                  >
+                    펼치기
+                  </span>
+                </div>
+              )}
+            </p>
+          </>
+        ) : (
+          <p className={styles.title}>아직 기상 속보가 없습니다.</p>
+        )}
       </div>
     </div>
   );
 }
 
-// import { useEffect, useState } from "react";
-// import styles from "./alertModal.module.css";
-// import { fetchHWImpact } from "../../api/MainApi";
-// import regIdMap from "../../data/regIdMap.json";
-// import dayjs from "dayjs";
-
-// export default function AlertModal() {
-//   const [selectedRegion, setSelectedRegion] = useState(null); // 선택된 시군구
-//   const [alertData, setAlertData] = useState(null);
-
-//   const handleRegionSelect = async (regionName) => {
-//     const regId = regIdMap[regionName];
-//     if (!regId) {
-//       console.warn("예보구역 코드(regId) 없음:", regionName);
-//       return;
-//     }
-
-//     setSelectedRegion(regionName);
-
-//     try {
-//       const date = dayjs().format("YYYYMMDD");
-//       const result = await fetchHWImpact({ regId, date });
-//       const item = result.response?.body?.items?.item?.[0];
-//       if (item) {
-//         setAlertData({ ...item, regionName });
-//       }
-//     } catch (err) {
-//       console.error("폭염 경보 가져오기 실패:", err);
-//     }
-//   };
-
-//   return (
-//     <div className={styles.background}>
-//       <div className={styles.modal}>
-//         <p className={styles.title}>
-//           시군구를 선택해 폭염 경보를 확인하세요.
-//         </p>
-
-//         <div className={styles.regionList}>
-//           {Object.keys(regIdMap).map((region) => (
-//             <button
-//               key={region}
-//               onClick={() => handleRegionSelect(region)}
-//               className={`${styles.regionButton} ${
-//                 selectedRegion === region ? styles.selected : ""
-//               }`}
-//             >
-//               {region}
-//             </button>
-//           ))}
-//         </div>
-
-//         {alertData && (
-//           <>
-//             <p className={styles.title}>
-//               오늘 <strong>{alertData.wrnmsg || "폭염주의보가 발령됩니다."}</strong>
-//             </p>
-//             <p className={styles.description}>
-//               발령 위치 | {alertData.regionName}
-//               <br />
-//               발령 시간 | {alertData.tmFc || "알 수 없음"}
-//               <br />
-//               모든 여행자는 알림을 참고하여 여행 시 주의하고, 바깥 활동을 자제해주세요.
-//             </p>
-//             <button className={styles.primaryButton}>폭우 시 대처 요령 자세히 보기</button>
-//             <button className={styles.secondaryButton}>오늘 하루 그만 보기</button>
-//           </>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
+function formatTime(value) {
+  const str = String(value);
+  if (!str || str.length !== 12) return null;
+  return str.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})/, "$1-$2-$3 $4:$5");
+}

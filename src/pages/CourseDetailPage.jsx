@@ -5,7 +5,6 @@ import { fetchAiCourseDetail, fetchUserCourseDetail } from "../api/CourseDetailA
 import Header from "../components/header/Header";
 import CourseTitle from "../components/courseDetail/CourseTitle";
 import NaverMapView from "../components/courseDetail/NaverMapView";
-import FacilityIcons from "../components/courseDetail/FacilityIcons";
 import PlaceList from "../components/courseDetail/PlaceList";
 import DayTabs from "../components/addTravel/DayTab";
 
@@ -66,8 +65,6 @@ export default function CourseDetailPage() {
         selectedDay={selectedDay}
         onSelectDay={setSelectedDay}
       />
-
-      {/* <FacilityIcons barrierFree={collectBarrierFree(schedules)} /> */}
 
       <PlaceList schedules={currentDaySchedule || []} />
     </div>

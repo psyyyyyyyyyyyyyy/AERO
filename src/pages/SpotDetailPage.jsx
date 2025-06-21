@@ -7,6 +7,7 @@ import {
 } from "../api/SpotDetailApi.js";
 import { ClipLoader } from "react-spinners";
 
+import ScrollToTopButton from "../components/common/ScrollToTopButton.jsx";
 import SpotDetailHeader from "../components/spotDetail/SpotDetailHeader";
 import SpotOverview from "../components/spotDetail/SpotOverview";
 import SpotMeta from "../components/spotDetail/SpotMeta";
@@ -19,7 +20,7 @@ export default function SpotDetailPage() {
   const { contentId } = useParams();
   const location = useLocation();
   console.log(location.state?.liked);
-  
+
   const liked = location.state?.liked ?? false;
 
   console.log(liked);
@@ -73,6 +74,7 @@ export default function SpotDetailPage() {
           <SpotMeta spot={spot} intro={intro} homepage={spot.homepage} />
         )}
       </div>
+      <ScrollToTopButton />
     </>
   );
 }

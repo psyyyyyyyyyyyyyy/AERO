@@ -62,6 +62,7 @@ export default function TodayWeather() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>오늘의 날씨</h2>
+      <p className={styles.sub}>AERO와 함께 날씨를 확인하며 여행을 시작해봐요!</p>
       <div className={styles.card}>
         <div className={styles.icon}>{weather ? weather.icon : "🌡️"}</div>
         <div className={styles.info}>
