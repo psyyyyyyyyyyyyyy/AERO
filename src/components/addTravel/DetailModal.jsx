@@ -26,13 +26,13 @@ const allDetails = useScheduleStore((state) => state.detailsByDay);
         <div className={styles.scrollArea}>
           {places.map((place, index) => (
             <div key={index} className={styles.block}>
-              <input
+              {/* <input
                 type="text"
                 placeholder="시간 예: PM 2:00"
                 value={details[index]?.time || ""}
                 onChange={(e) => handleChange(index, "time", e.target.value)}
                 className={styles.input}
-              />
+              /> */}
               <input
                 type="text"
                 value={place.value || ""}

@@ -1,0 +1,42 @@
+.tabWrapper {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 12px;
+  overflow-x: auto;
+  position: relative;
+  mask-image: linear-gradient(to right, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, black 95%, transparent);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.tabWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  padding: 8px 16px;
+  border: none;
+  background-color: #b2e6f5;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 70px;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.active {
+  background-color: white;
+  color: black;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}

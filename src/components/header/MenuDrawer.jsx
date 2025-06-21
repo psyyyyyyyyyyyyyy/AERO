@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./menuDrawer.module.css";
 import { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
-import AERO from "../../assets/images/AERO4.png";
+import AERO from "../../assets/images/AERO.png";
 import { logoutUser, withdrawUser } from "../../api/LoginApi";
 import WithdrawModal from "./WithdrawModal";
 

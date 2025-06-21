@@ -3,11 +3,13 @@ import { useForm, useWatch } from "react-hook-form";
 import { fetchTourSpots } from "../api/RegionSearchApi";
 
 import Header from "../components/header/Header";
+import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import RegionTabs from "../components/regionSearch/RegionTabs";
 import RegionMap from "../components/regionSearch/RegionMap";
 import FacilityToggle from "../components/regionSearch/FacilityToggle";
 import FacilityOptions from "../components/regionSearch/FacilityOptions";
 import SortTabs from "../components/regionSearch/SortTabs";
+import ThemeTabs from "../components/regionSearch/ThemeTabs";
 import TourCardList from "../components/regionSearch/TourCardList";
 import Pagination from "../components/regionSearch/Pagination";
 
@@ -90,6 +92,7 @@ export default function RegionSearchPage() {
         onSelect={(region) => {
           setSelectedRegion(region);
           setValue("areaCode", region.code);
+          setValue("sigunguCode", ""); // 지역 바뀔 때 시군구 초기화
           setValue("page", 0); // 지역 바꾸면 페이지 0으로 초기화
         }}
       />
@@ -101,7 +104,7 @@ export default function RegionSearchPage() {
           viewBox={currentViewBox}
           onSelect={(code) => {
             setValue("sigunguCode", code);
-            setValue("page", 0); // 시군구 바꿔도 페이지 초기화
+            setValue("page", 0);
           }}
         />
       ) : (
@@ -139,6 +142,14 @@ export default function RegionSearchPage() {
         }}
       />
 
+      <ThemeTabs
+        selectedThemes={formValues.themeFilters}
+        onChange={(newThemes) => {
+          setValue("themeFilters", newThemes);
+          setValue("page", 0); // 테마 바꿀 때 페이지 초기화
+        }}
+      />
+
       <SortTabs
         current={formValues.sortBy}
         onSelect={(sort) => {
@@ -154,6 +165,8 @@ export default function RegionSearchPage() {
         totalPages={totalPages}
         onChange={(page) => setValue("page", page)} // 선택한 페이지 상위 전달
       />
+
+      <ScrollToTopButton />
     </div>
   );
 }

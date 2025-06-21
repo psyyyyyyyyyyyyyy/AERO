@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { FiCircle, FiCheckCircle } from "react-icons/fi";
 import styles from "./regionmap.module.css";
 
 export default function RegionMap({
   paths,
-  regionName,
   viewBox = "0 0 800 800",
   onSelect,
 }) {
-  const [selected, setSelected] = useState(null); // 단일 선택으로 변경
+  const [selected, setSelected] = useState(null);
 
   const handleClick = (id, sigunguCode) => {
-    const newSelected = id === selected ? null : id;
+    const isDeselect = id === selected;
+    const newSelected = isDeselect ? null : id;
     setSelected(newSelected);
-    onSelect(sigunguCode); // 부모로 시군구코드 전달
+    onSelect(isDeselect ? "" : sigunguCode);
   };
 
   return (
@@ -24,7 +23,7 @@ export default function RegionMap({
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
           height="auto"
-          preserveAspectRatio="xMidYMid meet" // 반응형을 위한 비율 유지
+          preserveAspectRatio="xMidYMid meet"
         >
           {paths.map(({ id, name, d, label, sigunguCode }) => (
             <g key={id}>
@@ -34,6 +33,7 @@ export default function RegionMap({
                 fill={selected === id ? "#D3F1FC" : "#fff"}
                 stroke="#000"
                 style={{ cursor: "pointer" }}
+                onMouseOver={(e) => e.currentTarget.removeAttribute("title")}
               />
               <text className={styles.regionName} x={label.x} y={label.y}>
                 {name}

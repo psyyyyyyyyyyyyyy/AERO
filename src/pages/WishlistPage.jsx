@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header/Header";
+import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import WishlistTabs from "../components/wishlist/WishlistTabs";
 import ModeTabs from "../components/wishlist/ModeTabs";
 import WishlistCard from "../components/wishlist/WishlistCard";
@@ -134,6 +135,7 @@ export default function WishlistPage() {
             })()}
         </div>
       </div>
+      <ScrollToTopButton />
     </>
   );
 }

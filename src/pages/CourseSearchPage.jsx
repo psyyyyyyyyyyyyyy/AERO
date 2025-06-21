@@ -3,6 +3,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { fetchCourses } from "../api/CourseSearchApi";
 
 import Header from "../components/header/Header";
+import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import FacilityToggle from "../components/regionSearch/FacilityToggle";
 import FacilityOptions from "../components/regionSearch/FacilityOptions";
 import SortTabs from "../components/courseSearch/SortTabs";
@@ -105,6 +106,8 @@ export default function CourseSearchPage() {
         totalPages={totalPages}
         onChange={(page) => setValue("page", page)}
       />
+
+      <ScrollToTopButton />
     </div>
   );
 }
