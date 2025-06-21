@@ -9,18 +9,18 @@ import styles from "./myMapPage.module.css";
 export default function MyMapPage() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [logs, setLogs] = useState([]); // 여행 기록 상태
+  const [logs, setLogs] = useState([]);
+
+  const loadLogs = async () => {
+    try {
+      const data = await fetchTravelLogs();
+      setLogs(data);
+    } catch (err) {
+      console.error("여행 기록 불러오기 실패:", err);
+    }
+  };
 
   useEffect(() => {
-    const loadLogs = async () => {
-      try {
-        const data = await fetchTravelLogs();
-        setLogs(data); // [{ id, address, imageUrl, content }]
-      } catch (err) {
-        console.error("여행 기록 불러오기 실패:", err);
-      }
-    };
-
     loadLogs();
   }, []);
 
@@ -38,7 +38,6 @@ export default function MyMapPage() {
           </button>
         </header>
 
-        {/* 여행기록 전달 */}
         <MyMap logs={logs} onMarkerClick={setSelectedMarker} />
 
         {selectedMarker && (
@@ -47,7 +46,13 @@ export default function MyMapPage() {
             markerData={selectedMarker}
           />
         )}
-        {showEditModal && <EditModal onClose={() => setShowEditModal(false)} />}
+
+        {showEditModal && (
+          <EditModal
+            onClose={() => setShowEditModal(false)}
+            onSaveSuccess={loadLogs} // 저장 후 새로고침
+          />
+        )}
       </div>
     </>
   );

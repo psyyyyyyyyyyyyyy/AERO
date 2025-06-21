@@ -35,7 +35,6 @@ export async function fetchWeatherAlert(regionName) {
     const response = await axios.get(BASE_URL, { params });
     return response.data.response.body.items.item;
   } catch (error) {
-    console.error("기상 속보 API 호출 오류:", error);
     return null;
   }
 }

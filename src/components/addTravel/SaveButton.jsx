@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ 추가
+import { useNavigate } from "react-router-dom";
 import styles from "./saveButton.module.css";
 import DetailModal from "./DetailModal";
 
@@ -8,8 +8,10 @@ export default function SaveButton({ onSave, selectedDay }) {
   const navigate = useNavigate();
 
   const handleSave = async () => {
-    await onSave();          // 먼저 저장 실행 (비동기 가능성 고려)
-    navigate("/mypage");     // 저장 완료 후 /mypage 이동
+    const success = await onSave();
+    if (success) {
+      navigate("/mypage");
+    }
   };
 
   return (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { fetchCourses } from "../api/CourseSearchApi";
+import { ClipLoader } from "react-spinners";
 
 import Header from "../components/header/Header";
 import ScrollToTopButton from "../components/common/ScrollToTopButton";
@@ -15,13 +16,14 @@ export default function CourseSearchPage() {
   const [showFacilities, setShowFacilities] = useState(false);
   const [courses, setCourses] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const { setValue, getValues, control } = useForm({
     defaultValues: {
       theme: "자연관광",
       barrierFree: "",
       type: "ai",
-      sortBy: "recent",
+      sortBy: "like",
       page: 0,
       size: 10,
     },
@@ -33,15 +35,20 @@ export default function CourseSearchPage() {
     if (!formValues.barrierFree || formValues.barrierFree === "") {
       delete formValues.barrierFree;
     }
+
     const fetchData = async () => {
       try {
+        setLoading(true); // 로딩 시작
         const res = await fetchCourses(getValues());
         setCourses(res.content);
         setTotalPages(res.totalPages);
       } catch (e) {
         console.error(e);
+      } finally {
+        setLoading(false); // 로딩 종료
       }
     };
+
     fetchData();
   }, [JSON.stringify(formValues)]);
 
@@ -99,7 +106,19 @@ export default function CourseSearchPage() {
         }}
       />
 
-      <TourCardList spots={courses} />
+      {loading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "40px 0",
+          }}
+        >
+          <ClipLoader color="#7ED6EA" size={60} />
+        </div>
+      ) : (
+        <TourCardList spots={courses} />
+      )}
 
       <Pagination
         currentPage={formValues.page}

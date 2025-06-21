@@ -32,6 +32,7 @@ export default function InputGroup({
         className={styles.input}
         placeholder="여행명"
         value={title}
+        maxLength={20}
         onChange={(e) => setTitle(e.target.value)}
       />
 

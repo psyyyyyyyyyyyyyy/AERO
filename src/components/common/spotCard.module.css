@@ -27,3 +27,13 @@
   font-size: 14px;
   color: #666;
 }
+
+.card {
+  cursor: pointer; /* 클릭 가능한 느낌 추가 */
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02); /* 약간 확대 효과 */
+}
+
