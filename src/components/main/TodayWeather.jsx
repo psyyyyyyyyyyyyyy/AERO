@@ -2,20 +2,14 @@ import { useEffect, useState } from "react";
 import styles from "./todayWeather.module.css";
 import { fetchCurrentWeather } from "../../api/MainApi";
 import convertXY from "./convertXY";
-import { getRegionFromCoords } from "../../api/GeocodeApi";
 
 export default function TodayWeather() {
   const [weather, setWeather] = useState(null);
-  const [location, setLocation] = useState("위치 확인 중...");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const { latitude, longitude } = pos.coords;
       const { nx, ny } = convertXY(latitude, longitude);
-
-      // REST 방식으로 행정구 이름 가져오기
-      const region = await getRegionFromCoords(latitude, longitude);
-      setLocation(region);
 
       const items = await fetchCurrentWeather({ nx, ny });
       if (items) {
@@ -68,10 +62,11 @@ export default function TodayWeather() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>오늘의 날씨</h2>
+      <p className={styles.sub}>AERO와 함께 날씨를 확인하며 여행을 시작해봐요!</p>
       <div className={styles.card}>
         <div className={styles.icon}>{weather ? weather.icon : "🌡️"}</div>
         <div className={styles.info}>
-          <div className={styles.city}>{location}</div>
+          <div className={styles.city}>현재 위치</div>
           <div className={styles.temp}>
             {weather ? `${weather.description} ${weather.temp}°C` : "로딩 중..."}
           </div>
