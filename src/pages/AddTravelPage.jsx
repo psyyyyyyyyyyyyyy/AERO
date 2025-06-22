@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./addTravelPage.module.css";
 
 import Header from "../components/header/Header";
@@ -23,12 +23,20 @@ export default function AddTravelPage() {
   const [selectedDay, setSelectedDay] = useState(1);
 
   const location = useLocation();
+  const navigate = useNavigate();
   const resetStore = useScheduleStore((state) => state.resetStore);
 
-  useEffect(() => {
-    // 페이지가 처음 진입하거나 url 바뀌면 Zustand 초기화
+ useEffect(() => {
+    // 토큰 없으면 리다이렉트
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      navigate("/start");
+      return;
+    }
+
+    // URL 바뀌거나 새로 진입할 때 Zustand 초기화
     resetStore();
-  }, [location.pathname]);
+  }, [location.pathname, navigate]);
 
   // 여행 일 수 계산
   const getTotalDays = () => {
