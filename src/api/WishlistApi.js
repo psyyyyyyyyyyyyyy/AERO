@@ -18,3 +18,8 @@ export const fetchLikedTourSpots = async () => {
   const res = await APIService.private.get(`/api/tourspots/likes/my`);
   return res;
 }
+
+//유저 코스 삭제
+export const deleteUserCourse = async (courseId) => {
+  return await APIService.private.delete(`/api/courses/${courseId}`);
+};

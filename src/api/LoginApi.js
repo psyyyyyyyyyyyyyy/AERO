@@ -30,11 +30,12 @@ export async function logoutUser() {
 // 회원 탈퇴 요청 (토큰 필요)
 export async function withdrawUser() {
   try {
-    const response = await APIService.private.post("/api/auth/withdraw");
+    const response = await APIService.private.delete("/api/auth/withdraw");
     return response;
   } catch (error) {
     console.error("회원 탈퇴 실패:", error);
     throw error;
   }
 }
+
 

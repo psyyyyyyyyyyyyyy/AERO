@@ -128,9 +128,16 @@ export default function WishlistPage() {
                         image={repImage || img1}
                         title={item.title}
                         subtitle={item.theme}
+                        courseId={item.id}
+                        type={idPrefix} // 'user' 또는 'ai'
+                        mode={mode} // 'my' 또는 'like' 넘김
                         onClick={() =>
                           navigate(`/courses/${idPrefix}/${item.id}`)
                         }
+                        onDeleted={async () => {
+                          const data = await fetchUserCourses("user");
+                          setUserCourses(data.content || []);
+                        }}
                       />
                     );
                   });
