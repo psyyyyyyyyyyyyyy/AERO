@@ -21,6 +21,15 @@ import { gwangjuPaths } from "../components/regionSearch/paths/gwangjuPaths";
 import { ulsanPaths } from "../components/regionSearch/paths/ulsanPaths";
 import { sejongPaths } from "../components/regionSearch/paths/sejongPaths";
 import { gyeonggiPaths } from "../components/regionSearch/paths/gyeonggiPaths";
+import { gyeongnamPaths } from "../components/regionSearch/paths/gyeongnamPaths";
+import { gangwonPaths } from "../components/regionSearch/paths/gangwonPaths";
+import { incheonPaths } from "../components/regionSearch/paths/incheonPaths";
+import { chungnamPaths } from "../components/regionSearch/paths/chungnamPaths";
+import { chungbukPaths } from "../components/regionSearch/paths/chungbukPaths";
+import { jeonnamPaths } from "../components/regionSearch/paths/jeonnamPaths";
+import { jeonbukPaths } from "../components/regionSearch/paths/jeonbukPaths";
+import { jejuPaths } from "../components/regionSearch/paths/jejuPaths";
+import { gyeongbukPaths } from "../components/regionSearch/paths/gyeongbukPaths";
 
 const pathMap = {
   서울: seoulPaths,
@@ -31,6 +40,15 @@ const pathMap = {
   울산: ulsanPaths,
   세종: sejongPaths,
   경기: gyeonggiPaths,
+  경북: gyeongbukPaths,
+  경남: gyeongnamPaths,
+  강원: gangwonPaths,
+  인천: incheonPaths,
+  충남: chungnamPaths,
+  충북: chungbukPaths,
+  전남: jeonnamPaths,
+  전북: jeonbukPaths,
+  제주: jejuPaths,
 };
 
 const viewBoxMap = {
@@ -41,6 +59,12 @@ const viewBoxMap = {
   광주: "0 0 800 600",
   세종: "-100 0 1000 1200",
   경기: "0 0 800 1000",
+  인천: "360 60 450 500",
+  충남: "150 0 670 600",
+  경북: "0 0 600 580",
+  전북: "100 0 700 500",
+  전남: "100 0 700 600",
+  제주: "0 500 800 600",
 };
 
 export default function RegionSearchPage() {
