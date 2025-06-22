@@ -47,7 +47,7 @@ export default function WishlistPage() {
           }
         }
       } catch (e) {
-        alert("다시 시도해주세요.");
+        return;
       } finally {
         setLoading(false);
       }
