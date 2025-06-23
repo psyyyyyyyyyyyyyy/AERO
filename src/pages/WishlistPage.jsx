@@ -4,6 +4,7 @@ import ScrollToTopButton from "../components/common/ScrollToTopButton";
 import WishlistTabs from "../components/wishlist/WishlistTabs";
 import ModeTabs from "../components/wishlist/ModeTabs";
 import WishlistCard from "../components/wishlist/WishlistCard";
+import Pagination from "../components/courseSearch/Pagination";
 import styles from "./wishlistPage.module.css";
 import img1 from "../assets/images/courseDetail/빈 이미지.png";
 import {
@@ -12,7 +13,7 @@ import {
   fetchLikedTourSpots,
 } from "../api/WishlistApi";
 import { useNavigate } from "react-router-dom";
-import { ClipLoader } from "react-spinners"; // 상단에 추가
+import { ClipLoader } from "react-spinners";
 
 export default function WishlistPage() {
   const [mode, setMode] = useState("my");
@@ -20,6 +21,10 @@ export default function WishlistPage() {
   const [aiCourses, setAiCourses] = useState([]);
   const [userAiTab, setUserAiTab] = useState("ai");
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [size] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +32,7 @@ export default function WishlistPage() {
       setLoading(true);
       try {
         if (mode === "my") {
-          const data = await fetchUserCourses(userAiTab);
+          const data = await fetchUserCourses(userAiTab, currentPage, size);
           if (userAiTab === "ai") {
             setAiCourses(data.content || []);
             setUserCourses([]);
@@ -35,16 +40,22 @@ export default function WishlistPage() {
             setUserCourses(data.content || []);
             setAiCourses([]);
           }
+          setTotalPages(data.totalPages || 1); // totalPages를 상태로 설정
         } else if (mode === "like") {
           if (userAiTab === "ai") {
-            const likedSpots = await fetchLikedTourSpots();
+            const likedSpots = await fetchLikedTourSpots(currentPage, size);
             setUserCourses(likedSpots.content || []);
             setAiCourses([]);
           } else {
-            const likedCourses = await fetchLikedCourses("like");
+            const likedCourses = await fetchLikedCourses(
+              "like",
+              currentPage,
+              size
+            );
             setUserCourses(likedCourses.content || []);
             setAiCourses([]);
           }
+          setTotalPages(likedCourses.totalPages || 1); // totalPages를 상태로 설정
         }
       } catch (e) {
         return;
@@ -54,7 +65,7 @@ export default function WishlistPage() {
     };
 
     loadData();
-  }, [mode, userAiTab]);
+  }, [mode, userAiTab, currentPage, size]);
 
   return (
     <>
@@ -155,6 +166,11 @@ export default function WishlistPage() {
               })()}
           </div>
         )}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onChange={(newPage) => setCurrentPage(newPage)} // 페이지 변경 시 호출
+        />
       </div>
       <ScrollToTopButton />
     </>
