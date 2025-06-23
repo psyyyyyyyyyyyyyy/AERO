@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useEffect, useState } from "react";
 import { fetchTourSpots } from "../api/RegionSearchApi";
+import { useRegionSearchStore } from "../stores/useRegionSearchStore";
 
 import Header from "../components/header/Header";
 import ScrollToTopButton from "../components/common/ScrollToTopButton";
@@ -68,72 +68,72 @@ const viewBoxMap = {
 };
 
 export default function RegionSearchPage() {
-  const [selectedRegion, setSelectedRegion] = useState({
-    name: "서울",
-    code: "1",
-  });
   const [showFacilities, setShowFacilities] = useState(false);
   const [tourSpots, setTourSpots] = useState([]);
-  const [totalPages, setTotalPages] = useState(1); // 총 페이지 수 저장
+  const [totalPages, setTotalPages] = useState(1);
 
-  const { register, setValue, getValues, control } = useForm({
-    defaultValues: {
-      areaCode: "1",
-      sigunguCode: "",
-      facilityFilters: [],
-      themeFilters: [],
-      sortBy: "likes",
-      page: 0,
-      size: 10,
-    },
-  });
+  const {
+    filters,
+    setFilter,
+    resetPage,
+    regionName,
+    setRegionName,
+  } = useRegionSearchStore();
 
-  const formValues = useWatch({ control });
+  const currentPaths = pathMap[regionName];
+  const currentViewBox = viewBoxMap[regionName];
 
-  const currentPaths = pathMap[selectedRegion.name];
-  const currentViewBox = viewBoxMap[selectedRegion.name];
+  const allFacilities = [
+    "publictransport",
+    "elevator",
+    "wheelchair",
+    "guidehuman",
+    "restroom",
+    "parking",
+    "room",
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchTourSpots(getValues());
+        const data = await fetchTourSpots(filters);
         setTourSpots(data.content);
-        setTotalPages(data.totalPages); // 페이지 수 저장
+        setTotalPages(data.totalPages);
       } catch (e) {
         console.error(e);
       }
     };
 
     fetchData();
-  }, [JSON.stringify(formValues)]);
+  }, [JSON.stringify(filters)]);
 
   return (
     <div>
       <Header />
 
       <RegionTabs
-        selectedRegion={selectedRegion}
+        selectedRegion={{ name: regionName, code: filters.areaCode }}
         onSelect={(region) => {
-          setSelectedRegion(region);
-          setValue("areaCode", region.code);
-          setValue("sigunguCode", ""); // 지역 바뀔 때 시군구 초기화
-          setValue("page", 0); // 지역 바꾸면 페이지 0으로 초기화
+          setRegionName(region.name);
+          setFilter("areaCode", region.code);
+          setFilter("sigunguCode", "");
+          resetPage();
         }}
       />
 
       {currentPaths ? (
         <RegionMap
           paths={currentPaths}
-          regionName={selectedRegion.name}
           viewBox={currentViewBox}
-          onSelect={(code) => {
-            setValue("sigunguCode", code);
-            setValue("page", 0);
+          selectedSigungu={filters.sigunguCode}
+          onSelect={(sigunguCode) => {
+            setFilter("sigunguCode", sigunguCode);
+            resetPage();
           }}
         />
       ) : (
         <div style={{ textAlign: "center", margin: "30px" }}>
-          "{selectedRegion.name}" 지역 지도 준비 중
+          "{regionName}" 지역 지도 준비 중
         </div>
       )}
 
@@ -141,53 +141,44 @@ export default function RegionSearchPage() {
         onClick={() => setShowFacilities((prev) => !prev)}
         active={showFacilities}
         onToggleAll={() => {
-          const allOptions = [
-            "publictransport",
-            "elevator",
-            "wheelchair",
-            "guidehuman",
-            "restroom",
-            "parking",
-            "room",
-          ];
           const isAllSelected =
-            formValues.facilityFilters.length === allOptions.length;
-          setValue("facilityFilters", isAllSelected ? [] : allOptions);
+            filters.facilityFilters.length === allFacilities.length;
+          setFilter("facilityFilters", isAllSelected ? [] : allFacilities);
         }}
-        isAllSelected={formValues.facilityFilters.length === 7}
+        isAllSelected={filters.facilityFilters.length === allFacilities.length}
       />
 
       <FacilityOptions
         visible={showFacilities}
-        selected={formValues.facilityFilters}
-        onChange={(filters) => {
-          setValue("facilityFilters", filters);
-          setValue("page", 0); // 필터 바꿀 때도 페이지 초기화
+        selected={filters.facilityFilters}
+        onChange={(selected) => {
+          setFilter("facilityFilters", selected);
+          resetPage();
         }}
       />
 
       <ThemeTabs
-        selectedThemes={formValues.themeFilters}
-        onChange={(newThemes) => {
-          setValue("themeFilters", newThemes);
-          setValue("page", 0); // 테마 바꿀 때 페이지 초기화
+        selectedThemes={filters.themeFilters}
+        onChange={(themes) => {
+          setFilter("themeFilters", themes);
+          resetPage();
         }}
       />
 
       <SortTabs
-        current={formValues.sortBy}
+        current={filters.sortBy}
         onSelect={(sort) => {
-          setValue("sortBy", sort);
-          setValue("page", 0); // 정렬 변경 시 페이지 초기화
+          setFilter("sortBy", sort);
+          resetPage();
         }}
       />
 
       <TourCardList spots={tourSpots} />
 
       <Pagination
-        currentPage={formValues.page}
+        currentPage={filters.page}
         totalPages={totalPages}
-        onChange={(page) => setValue("page", page)} // 선택한 페이지 상위 전달
+        onChange={(page) => setFilter("page", page)}
       />
 
       <ScrollToTopButton />
