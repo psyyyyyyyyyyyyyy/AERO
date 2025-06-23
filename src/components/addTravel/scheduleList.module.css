@@ -15,6 +15,7 @@
   border-radius: 12px;
   padding: 12px;
   transition: background 0.2s ease;
+  flex-wrap: wrap;
 }
 
 .number {
@@ -38,6 +39,11 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.icon svg {
+  fill: #555;
+}
+
 
 .add {
   display: block;
