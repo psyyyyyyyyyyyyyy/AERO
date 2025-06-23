@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
 import { fetchCourses } from "../api/CourseSearchApi";
 import { ClipLoader } from "react-spinners";
 
@@ -12,55 +11,53 @@ import TourCardList from "../components/courseSearch/TourCardList";
 import Pagination from "../components/courseSearch/Pagination";
 import ThemeTabs from "../components/courseSearch/ThemeTabs";
 
+import { useCourseSearchStore } from "../stores/useCourseSearchStore";
+
 export default function CourseSearchPage() {
-  const [showFacilities, setShowFacilities] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [showFacilities, setShowFacilities] = useState(false);
 
-  const { setValue, getValues, control } = useForm({
-    defaultValues: {
-      theme: "자연관광",
-      barrierFree: "",
-      type: "ai",
-      sortBy: "like",
-      page: 0,
-      size: 10,
-    },
-  });
-
-  const formValues = useWatch({ control });
+  const { filters, setFilter, resetPage } = useCourseSearchStore();
 
   useEffect(() => {
-    if (!formValues.barrierFree || formValues.barrierFree === "") {
-      delete formValues.barrierFree;
-    }
-
     const fetchData = async () => {
       try {
-        setLoading(true); // 로딩 시작
-        const res = await fetchCourses(getValues());
+        setLoading(true);
+        const res = await fetchCourses(filters);
         setCourses(res.content);
         setTotalPages(res.totalPages);
       } catch (e) {
         console.error(e);
       } finally {
-        setLoading(false); // 로딩 종료
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, [JSON.stringify(formValues)]);
+  }, [JSON.stringify(filters)]);
+
+  const barrierList = [
+    "publictransport",
+    "elevator",
+    "wheelchair",
+    "guidehuman",
+    "restroom",
+    "parking",
+    "room",
+  ];
+  const selectedFilters = filters.barrierFree?.split(",") || [];
 
   return (
     <div>
       <Header />
 
       <ThemeTabs
-        selectedTheme={formValues.theme}
+        selectedTheme={filters.theme}
         onSelect={(theme) => {
-          setValue("theme", theme);
-          setValue("page", 0);
+          setFilter("theme", theme);
+          resetPage();
         }}
       />
 
@@ -68,52 +65,36 @@ export default function CourseSearchPage() {
         onClick={() => setShowFacilities((prev) => !prev)}
         active={showFacilities}
         onToggleAll={() => {
-          const all = [
-            "publictransport",
-            "elevator",
-            "wheelchair",
-            "guidehuman",
-            "restroom",
-            "parking",
-            "room",
-          ];
-          const isAll =
-            formValues.barrierFree?.split(",").length === all.length;
-          setValue("barrierFree", isAll ? "" : all.join(","));
+          const isAll = selectedFilters.length === barrierList.length;
+          setFilter("barrierFree", isAll ? "" : barrierList.join(","));
         }}
-        isAllSelected={formValues.barrierFree?.split(",").length === 7}
+        isAllSelected={selectedFilters.length === barrierList.length}
       />
 
       <FacilityOptions
         visible={showFacilities}
-        selected={formValues.barrierFree?.split(",") || []}
+        selected={selectedFilters}
         onChange={(filters) => {
-          setValue("barrierFree", filters.join(","));
-          setValue("page", 0);
+          setFilter("barrierFree", filters.join(","));
+          resetPage();
         }}
       />
 
       <SortTabs
-        current={formValues.sortBy}
+        current={filters.sortBy}
         onSelect={(sort) => {
-          setValue("sortBy", sort);
-          setValue("page", 0);
+          setFilter("sortBy", sort);
+          resetPage();
         }}
-        selectedType={formValues.type || "ai"}
+        selectedType={filters.type}
         onTypeChange={(type) => {
-          setValue("type", type);
-          setValue("page", 0);
+          setFilter("type", type);
+          resetPage();
         }}
       />
 
       {loading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "40px 0",
-          }}
-        >
+        <div style={{ display: "flex", justifyContent: "center", padding: "40px 0" }}>
           <ClipLoader color="#7ED6EA" size={60} />
         </div>
       ) : (
@@ -121,9 +102,9 @@ export default function CourseSearchPage() {
       )}
 
       <Pagination
-        currentPage={formValues.page}
+        currentPage={filters.page}
         totalPages={totalPages}
-        onChange={(page) => setValue("page", page)}
+        onChange={(page) => setFilter("page", page)}
       />
 
       <ScrollToTopButton />
