@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RegionSelector from "../components/aiCourse/RegionSelector";
 import CompanionSelector from "../components/aiCourse/CompanionSelector";
 import DateSelector from "../components/aiCourse/DateSelector";
@@ -27,6 +27,13 @@ export default function AiCoursePage() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      navigate("/start");
+    }
+  }, []);
 
   const handleNext = async () => {
     if (step === 5) {
