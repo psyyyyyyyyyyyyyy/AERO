@@ -54,8 +54,8 @@ export default function WishlistPage() {
             );
             setUserCourses(likedCourses.content || []);
             setAiCourses([]);
+            setTotalPages(likedCourses.totalPages || 1); // totalPages를 상태로 설정
           }
-          setTotalPages(likedCourses.totalPages || 1); // totalPages를 상태로 설정
         }
       } catch (e) {
         return;
