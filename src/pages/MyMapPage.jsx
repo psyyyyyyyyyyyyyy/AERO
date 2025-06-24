@@ -3,7 +3,7 @@ import Header from "../components/header/Header";
 import MyMap from "../components/myMap/MyMap";
 import MarkerModal from "../components/myMap/MarkerModal";
 import EditModal from "../components/myMap/EditModal";
-import { fetchTravelLogs } from "../api/MyMapApi";
+import { fetchTravelLogs } from "../api/MyMapApi.js";
 import styles from "./myMapPage.module.css";
 
 export default function MyMapPage() {
@@ -44,6 +44,10 @@ export default function MyMapPage() {
           <MarkerModal
             onClose={() => setSelectedMarker(null)}
             markerData={selectedMarker}
+            onDeleteSuccess={() => {
+              setSelectedMarker(null);
+              loadLogs(); // 삭제 후 로그 다시 불러오기
+            }}
           />
         )}
 
