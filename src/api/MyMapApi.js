@@ -19,3 +19,9 @@ export async function fetchTravelLogs() {
   return await APIService.private.get("/api/travel-logs");
 }
 
+export async function deleteTravelLog(id) {
+  const response = await APIService.private.delete(`/api/travel-logs/${id}`);
+  return response;
+}
+
+

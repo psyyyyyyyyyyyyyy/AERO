@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import markerImage from "../../assets/images/myMap/marker.png"; 
+import markerImage from "../../assets/images/myMap/marker.png";
 
 export default function MyMap({ logs = [], onMarkerClick }) {
   const mapRef = useRef(null);
@@ -47,13 +47,14 @@ export default function MyMap({ logs = [], onMarkerClick }) {
     const map = mapInstanceRef.current;
     if (!naver || !map || !naver.maps.Service?.geocode) return;
 
+    //  기존 마커 제거
+    markersRef.current.forEach((markerObj) => {
+      markerObj.marker.setMap(null);
+    });
+    markersRef.current = [];
+
     logs.forEach((log) => {
       if (!log.address?.trim()) return;
-
-      const exists = markersRef.current.some(
-        (markerObj) => markerObj.id === log.id
-      );
-      if (exists) return;
 
       naver.maps.Service.geocode({ query: log.address }, (status, response) => {
         if (status !== naver.maps.Service.Status.OK) return;
@@ -61,13 +62,13 @@ export default function MyMap({ logs = [], onMarkerClick }) {
         if (!result) return;
 
         const latlng = new naver.maps.LatLng(result.y, result.x);
-        
+
         const marker = new naver.maps.Marker({
           position: latlng,
           map,
           icon: {
             content: `<img src="${markerImage}" style="width: 30px; height: 40px;" />`,
-            anchor: new naver.maps.Point(15, 40), // 중심 위치 조절
+            anchor: new naver.maps.Point(15, 40),
           },
         });
 
