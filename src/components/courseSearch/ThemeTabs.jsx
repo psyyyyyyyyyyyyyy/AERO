@@ -7,7 +7,7 @@ const themes = [
   "레저스포츠",
   "쇼핑",
   "음식",
-  "축제/공연/행사",
+  //"축제/공연/행사",
 ];
 
 export default function ThemeTabs({ selectedTheme, onSelect }) {

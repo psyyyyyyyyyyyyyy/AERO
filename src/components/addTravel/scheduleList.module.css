@@ -15,6 +15,7 @@
   border-radius: 12px;
   padding: 12px;
   transition: background 0.2s ease;
+  flex-wrap: wrap;
 }
 
 .number {
@@ -27,6 +28,7 @@
 .input {
   flex: 1;
   border: none;
+  min-width: 0;
   background: transparent;
   font-size: 16px;
   padding-left: 8px;
@@ -36,7 +38,14 @@
   margin-left: 10px;
   color: #555;
   cursor: pointer;
+  font-size: 16px;
+  flex-shrink: 0;
 }
+
+.icon svg {
+  fill: #555;
+}
+
 
 .add {
   display: block;

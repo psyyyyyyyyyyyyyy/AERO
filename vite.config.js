@@ -8,7 +8,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       workbox: {
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, //5MB로 상향 (기본 2MB)
+        maximumFileSizeToCacheInBytes: 20 * 1024 * 1024, //20MB로 상향 (기본 2MB)
       },
       includeAssets: [
         "favicon.svg",
