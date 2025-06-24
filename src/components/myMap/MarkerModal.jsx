@@ -1,6 +1,6 @@
 import { FiX, FiTrash2 } from "react-icons/fi";
 import styles from "./markerModal.module.css";
-import { deleteTravelLog } from "../../api/MymapApi";
+import { deleteTravelLog } from "../../api/MyMapApi";
 
 export default function MarkerModal({ onClose, markerData, onDeleteSuccess }) {
   const handleDelete = async () => {
